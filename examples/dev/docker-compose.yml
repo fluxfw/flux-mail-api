@@ -1,0 +1,26 @@
+version: "3"
+services:
+  mail:
+    environment:
+      - FLUX_MAIL_FETCH_HOST=...
+      - FLUX_MAIL_FETCH_PORT=993
+      - FLUX_MAIL_FETCH_TYPE=imap
+      - FLUX_MAIL_FETCH_USER_NAME=...
+      - FLUX_MAIL_FETCH_PASSWORD=...
+      - FLUX_MAIL_FETCH_ENCRYPTION_TYPE=tls-auto
+      - FLUX_MAIL_FETCH_MARK_AS_READ=false
+      - FLUX_MAIL_SMTP_HOST=smtp
+      - FLUX_MAIL_SMTP_PORT=1025
+      - FLUX_MAIL_SEND_FROM=from@test.local
+      - FLUX_MAIL_SEND_FROM_NAME=Test From User
+    image: docker-registry.fluxpublisher.ch/flux-mail:latest
+    ports:
+      - [%host_ip%:]9501:9501
+  smtp:
+    image: mailhog/mailhog:latest
+    ports:
+      - [%host_ip%:]8025:8025
+  other_service:
+    environment:
+      - [FLUX_MAIL_HOST=mail]
+      - [FLUX_MAIL_PORT=9501]
