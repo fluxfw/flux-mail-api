@@ -1,0 +1,30 @@
+include:
+  - https://utils.fluxpublisher.ch/FluxPublishUtils.yml
+
+variables:
+  DOCKER_REGISTRY_NAME: flux-mail
+  DEV_DOCKER_REGISTRY_IMAGE: $DEV_DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_NAME
+  DOCKER_REGISTRY_IMAGE: $DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_NAME
+
+build:
+  stage: build
+  script:
+    - echo -n $DEV_DOCKER_REGISTRY_PASSWORD | docker login -u $DEV_DOCKER_REGISTRY_USER --password-stdin $DEV_DOCKER_REGISTRY_URL;
+      docker build . --pull -t $DEV_DOCKER_REGISTRY_IMAGE:latest;
+      docker push $DEV_DOCKER_REGISTRY_IMAGE:latest;
+      docker logout $DEV_DOCKER_REGISTRY_URL;
+  only:
+    - /^develop$/
+
+publish:
+  stage: deploy
+  script:
+    - echo -n $DEV_DOCKER_REGISTRY_PASSWORD | docker login -u $DEV_DOCKER_REGISTRY_USER --password-stdin $DEV_DOCKER_REGISTRY_URL;
+      docker pull $DEV_DOCKER_REGISTRY_IMAGE:latest;
+      docker logout $DEV_DOCKER_REGISTRY_URL;
+    - echo -n $DOCKER_REGISTRY_PASSWORD | docker login -u $DOCKER_REGISTRY_USER --password-stdin $DOCKER_REGISTRY_URL;
+      docker tag $DEV_DOCKER_REGISTRY_IMAGE:latest $DOCKER_REGISTRY_IMAGE:latest;
+      docker push $DOCKER_REGISTRY_IMAGE:latest;
+      docker logout $DOCKER_REGISTRY_URL;
+  only:
+    - /^main$/
