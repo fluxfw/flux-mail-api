@@ -20,7 +20,7 @@ if (($_ENV["FLUX_MAIL_HTTPS_CERT"] ?? null) !== null) {
     $sock_type += SWOOLE_SSL;
 }
 
-$server = new Server($_ENV["FLUX_MAIL_LISTEN"] ?? "0.0.0.0", $ENV["FLUX_MAIL_PORT"] ?? 9501, SWOOLE_PROCESS, $sock_type);
+$server = new Server($_ENV["FLUX_MAIL_LISTEN"] ?? "0.0.0.0", $_ENV["FLUX_MAIL_PORT"] ?? 9501, SWOOLE_PROCESS, $sock_type);
 
 $server->set($options);
 

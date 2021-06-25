@@ -4,9 +4,9 @@ LABEL org.opencontainers.image.source="https://github.com/fluxapps/FluxMail"
 LABEL maintainer="fluxlabs <support@fluxlabs.ch> (https://fluxlabs.ch)"
 
 RUN apk add --no-cache imap-dev openssl-dev && \
-	docker-php-ext-configure imap --with-imap-ssl && \
-	docker-php-ext-install imap && \
-	docker-php-source delete
+    docker-php-ext-configure imap --with-imap-ssl && \
+    docker-php-ext-install imap && \
+    docker-php-source delete
 
 WORKDIR /app
 
