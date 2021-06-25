@@ -23,5 +23,5 @@ services:
       - ./data/certs:/certs:ro
   other_service:
     environment:
-      - [FLUX_MAIL_HOST=mail]
-      - [FLUX_MAIL_PORT=9501]
+      [- FLUX_MAIL_HOST=mail]
+      [- FLUX_MAIL_PORT=9501]
