@@ -2,8 +2,6 @@ version: "3"
 services:
   mail:
     environment:
-      - FLUX_MAIL_HTTPS_CERT=/certs/mail.crt
-      - FLUX_MAIL_HTTPS_KEY=/certs/mail.key
       - FLUX_MAIL_FETCH_HOST=...
       - FLUX_MAIL_FETCH_PORT=993
       - FLUX_MAIL_FETCH_TYPE=imap
@@ -19,8 +17,6 @@ services:
       - FLUX_MAIL_SEND_FROM_NAME=...
     image: docker-registry.fluxpublisher.ch/flux-mail:latest
     restart: always
-    volumes:
-      - ./data/certs:/certs:ro
   other_service:
     environment:
       [- FLUX_MAIL_HOST=mail]
