@@ -19,5 +19,7 @@ RUN sed -i "s/\$reverse = (int) \$reverse;/\$reverse = (bool) \$reverse;/" vendo
 
 WORKDIR bin
 
+EXPOSE 9501
+
 RUN chmod +x server.php
 ENTRYPOINT ["./server.php"]
