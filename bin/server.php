@@ -41,6 +41,7 @@ function request(Request $request, Response $response) : void
 
         default:
             $response->status(403);
+            $response->end();
             break;
     }
 }
@@ -53,6 +54,7 @@ function fetchRequest(Response $response) : void
 
     $response->header("Content-Type", "application/json;charset=utf-8");
     $response->write(json_encode($mails));
+    $response->end();
 }
 
 function sendRequest(Request $request, Response $response) : void
