@@ -21,5 +21,5 @@ WORKDIR bin
 
 EXPOSE 9501
 
-RUN chmod +x server.php
-ENTRYPOINT ["./server.php"]
+RUN chmod +x entrypoint.php
+ENTRYPOINT ["./entrypoint.php"]
