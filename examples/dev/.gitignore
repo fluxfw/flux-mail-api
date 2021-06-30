@@ -3,3 +3,4 @@
 !.gitignore
 !fetch.sh
 !send.sh
+!send-output.sh

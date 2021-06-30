@@ -1,6 +1,6 @@
 FROM phpswoole/swoole:4.6-php8.0-alpine
 
-LABEL org.opencontainers.image.source="https://github.com/fluxapps/FluxMail"
+LABEL org.opencontainers.image.source="https://github.com/fluxapps/FluxMailApi"
 LABEL maintainer="fluxlabs <support@fluxlabs.ch> (https://fluxlabs.ch)"
 
 RUN apk add --no-cache imap-dev openssl-dev && \

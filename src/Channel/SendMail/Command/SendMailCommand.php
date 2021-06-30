@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Channel\SendMail\Command;
+namespace Fluxlabs\FluxMailApi\Channel\SendMail\Command;
 
-use Fluxlabs\FluxMail\Adapter\Api\MailDto;
+use Fluxlabs\FluxMailApi\Adapter\Api\MailDto;
 
 class SendMailCommand
 {
