@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Adapter\Api;
+namespace Fluxlabs\FluxMailApi\Adapter\Api;
 
-use Fluxlabs\FluxMail\Config\FluxMailConfig;
+use Fluxlabs\FluxMailApi\Config\FluxMailConfig;
 
 class FluxMailApi
 {

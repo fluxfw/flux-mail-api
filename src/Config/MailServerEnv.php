@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Config;
+namespace Fluxlabs\FluxMailApi\Config;
 
 class MailServerEnv
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Channel\FetchMails\Port;
+namespace Fluxlabs\FluxMailApi\Channel\FetchMails\Port;
 
-use Fluxlabs\FluxMail\Adapter\Api\FetchedMailsDto;
-use Fluxlabs\FluxMail\Channel\FetchMails\Command\FetchMailsCommand;
-use Fluxlabs\FluxMail\Channel\FetchMails\Command\FetchMailsCommandHandler;
-use Fluxlabs\FluxMail\Config\MailServerEnv;
+use Fluxlabs\FluxMailApi\Adapter\Api\FetchedMailsDto;
+use Fluxlabs\FluxMailApi\Channel\FetchMails\Command\FetchMailsCommand;
+use Fluxlabs\FluxMailApi\Channel\FetchMails\Command\FetchMailsCommandHandler;
+use Fluxlabs\FluxMailApi\Config\MailServerEnv;
 
 class FetchMailsService
 {

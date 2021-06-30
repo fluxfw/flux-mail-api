@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Config;
+namespace Fluxlabs\FluxMailApi\Config;
 
-use Fluxlabs\FluxMail\Adapter\Api\AddressDto;
+use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
 
 class SmtpServerEnv
 {

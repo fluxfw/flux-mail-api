@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Channel\FetchMails\Command;
+namespace Fluxlabs\FluxMailApi\Channel\FetchMails\Command;
 
 class FetchMailsCommand
 {

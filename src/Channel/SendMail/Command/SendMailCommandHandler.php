@@ -1,9 +1,9 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Channel\SendMail\Command;
+namespace Fluxlabs\FluxMailApi\Channel\SendMail\Command;
 
-use Fluxlabs\FluxMail\Adapter\Api\AttachmentDto;
-use Fluxlabs\FluxMail\Config\SmtpServerEnv;
+use Fluxlabs\FluxMailApi\Adapter\Api\AttachmentDto;
+use Fluxlabs\FluxMailApi\Config\SmtpServerEnv;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SendMailCommandHandler

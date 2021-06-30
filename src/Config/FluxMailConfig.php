@@ -1,10 +1,10 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Config;
+namespace Fluxlabs\FluxMailApi\Config;
 
-use Fluxlabs\FluxMail\Adapter\Api\AddressDto;
-use Fluxlabs\FluxMail\Channel\FetchMails\Port\FetchMailsService;
-use Fluxlabs\FluxMail\Channel\SendMail\Port\SendMailService;
+use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
+use Fluxlabs\FluxMailApi\Channel\FetchMails\Port\FetchMailsService;
+use Fluxlabs\FluxMailApi\Channel\SendMail\Port\SendMailService;
 
 class FluxMailConfig
 {
@@ -28,14 +28,14 @@ class FluxMailConfig
     {
         if ($this->mail_server === null) {
             $this->mail_server = MailServerEnv::new(
-                $_ENV["FLUX_MAIL_FETCH_HOST"],
-                $_ENV["FLUX_MAIL_FETCH_PORT"],
-                $_ENV["FLUX_MAIL_FETCH_TYPE"],
-                $_ENV["FLUX_MAIL_FETCH_USER_NAME"],
-                $_ENV["FLUX_MAIL_FETCH_PASSWORD"],
-                $_ENV["FLUX_MAIL_FETCH_ENCRYPTION_TYPE"] ?? null,
-                $_ENV["FLUX_MAIL_FETCH_BOX"] ?? null,
-                ($mark_as_read = $_ENV["FLUX_MAIL_FETCH_MARK_AS_READ"] ?? null) !== null ? in_array($mark_as_read, ["true", "1"]) : null
+                $_ENV["FLUX_MAIL_API_FETCH_HOST"],
+                $_ENV["FLUX_MAIL_API_FETCH_PORT"],
+                $_ENV["FLUX_MAIL_API_FETCH_TYPE"],
+                $_ENV["FLUX_MAIL_API_FETCH_USER_NAME"],
+                $_ENV["FLUX_MAIL_API_FETCH_PASSWORD"],
+                $_ENV["FLUX_MAIL_API_FETCH_ENCRYPTION_TYPE"] ?? null,
+                $_ENV["FLUX_MAIL_API_FETCH_BOX"] ?? null,
+                ($mark_as_read = $_ENV["FLUX_MAIL_API_FETCH_MARK_AS_READ"] ?? null) !== null ? in_array($mark_as_read, ["true", "1"]) : null
             );
         }
 
@@ -47,16 +47,16 @@ class FluxMailConfig
     {
         if ($this->smtp_server === null) {
             $this->smtp_server = SmtpServerEnv::new(
-                $_ENV["FLUX_MAIL_SMTP_HOST"],
-                $_ENV["FLUX_MAIL_SMTP_PORT"],
+                $_ENV["FLUX_MAIL_API_SMTP_HOST"],
+                $_ENV["FLUX_MAIL_API_SMTP_PORT"],
                 AddressDto::new(
-                    $_ENV["FLUX_MAIL_SEND_FROM"],
-                    $_ENV["FLUX_MAIL_SEND_FROM_NAME"] ?? null
+                    $_ENV["FLUX_MAIL_API_SEND_FROM"],
+                    $_ENV["FLUX_MAIL_API_SEND_FROM_NAME"] ?? null
                 ),
-                $_ENV["FLUX_MAIL_SMTP_ENCRYPTION_TYPE"] ?? null,
-                $_ENV["FLUX_MAIL_SMTP_USER_NAME"] ?? null,
-                $_ENV["FLUX_MAIL_SMTP_PASSWORD"] ?? null,
-                $_ENV["FLUX_MAIL_SMTP_AUTH_TYPE"] ?? null
+                $_ENV["FLUX_MAIL_API_SMTP_ENCRYPTION_TYPE"] ?? null,
+                $_ENV["FLUX_MAIL_API_SMTP_USER_NAME"] ?? null,
+                $_ENV["FLUX_MAIL_API_SMTP_PASSWORD"] ?? null,
+                $_ENV["FLUX_MAIL_API_SMTP_AUTH_TYPE"] ?? null
             );
         }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a36565a01a0a155e323bc3547d6d5626",
+    "content-hash": "bb1a531d52dc7c238bf6098400f07c97",
     "packages": [
         {
             "name": "php-imap/php-imap",

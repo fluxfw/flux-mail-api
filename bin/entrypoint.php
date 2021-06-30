@@ -3,8 +3,8 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Fluxlabs\FluxMail\Adapter\Api\FluxMailApi;
-use Fluxlabs\FluxMail\Adapter\Api\MailDtoBuilder;
+use Fluxlabs\FluxMailApi\Adapter\Api\FluxMailApi;
+use Fluxlabs\FluxMailApi\Adapter\Api\MailDtoBuilder;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
 use Swoole\Http\Server;
@@ -12,15 +12,15 @@ use Swoole\Http\Server;
 $options = [];
 $sock_type = SWOOLE_TCP;
 
-if (($_ENV["FLUX_MAIL_HTTPS_CERT"] ?? null) !== null) {
+if (($_ENV["FLUX_MAIL_API_HTTPS_CERT"] ?? null) !== null) {
     $options += [
-        "ssl_cert_file" => $_ENV["FLUX_MAIL_HTTPS_CERT"],
-        "ssl_key_file"  => $_ENV["FLUX_MAIL_HTTPS_KEY"]
+        "ssl_cert_file" => $_ENV["FLUX_MAIL_API_HTTPS_CERT"],
+        "ssl_key_file"  => $_ENV["FLUX_MAIL_API_HTTPS_KEY"]
     ];
     $sock_type += SWOOLE_SSL;
 }
 
-$server = new Server($_ENV["FLUX_MAIL_LISTEN"] ?? "0.0.0.0", $_ENV["FLUX_MAIL_PORT"] ?? 9501, SWOOLE_PROCESS, $sock_type);
+$server = new Server($_ENV["FLUX_MAIL_API_LISTEN"] ?? "0.0.0.0", $_ENV["FLUX_MAIL_API_PORT"] ?? 9501, SWOOLE_PROCESS, $sock_type);
 
 $server->set($options);
 

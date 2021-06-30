@@ -1,12 +1,12 @@
 <?php
 
-namespace Fluxlabs\FluxMail\Channel\FetchMails\Command;
+namespace Fluxlabs\FluxMailApi\Channel\FetchMails\Command;
 
 use DateTime;
-use Fluxlabs\FluxMail\Adapter\Api\AttachmentDto;
-use Fluxlabs\FluxMail\Adapter\Api\FetchedMailsDto;
-use Fluxlabs\FluxMail\Adapter\Api\MailDtoBuilder;
-use Fluxlabs\FluxMail\Config\MailServerEnv;
+use Fluxlabs\FluxMailApi\Adapter\Api\AttachmentDto;
+use Fluxlabs\FluxMailApi\Adapter\Api\FetchedMailsDto;
+use Fluxlabs\FluxMailApi\Adapter\Api\MailDtoBuilder;
+use Fluxlabs\FluxMailApi\Config\MailServerEnv;
 use PhpImap\Mailbox;
 
 class FetchMailsCommandHandler
