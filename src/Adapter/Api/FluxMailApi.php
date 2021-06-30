@@ -2,7 +2,7 @@
 
 namespace Fluxlabs\FluxMailApi\Adapter\Api;
 
-use Fluxlabs\FluxMailApi\Config\FluxMailConfig;
+use Fluxlabs\FluxMailApi\Config\FluxMailApiConfig;
 
 class FluxMailApi
 {
@@ -15,9 +15,17 @@ class FluxMailApi
     }
 
 
+    public function initServer() : void
+    {
+        FluxMailApiConfig::new()
+            ->getInitServerService()
+            ->initServer();
+    }
+
+
     public function fetch() : FetchedMailsDto
     {
-        return FluxMailConfig::new()
+        return FluxMailApiConfig::new()
             ->getFetchMailsService()
             ->fetch();
     }
@@ -25,7 +33,7 @@ class FluxMailApi
 
     public function send(MailDto $mail) : void
     {
-        FluxMailConfig::new()
+        FluxMailApiConfig::new()
             ->getSendMailService()
             ->send(
                 $mail

@@ -4,12 +4,14 @@ namespace Fluxlabs\FluxMailApi\Config;
 
 use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
 use Fluxlabs\FluxMailApi\Channel\FetchMails\Port\FetchMailsService;
+use Fluxlabs\FluxMailApi\Channel\InitServer\Port\InitServerService;
 use Fluxlabs\FluxMailApi\Channel\SendMail\Port\SendMailService;
 
-class FluxMailConfig
+class FluxMailApiConfig
 {
 
     private static ?self $instance = null;
+    private ?ServerEnv $server = null;
     private ?MailServerEnv $mail_server = null;
     private ?SmtpServerEnv $smtp_server = null;
 
@@ -21,6 +23,21 @@ class FluxMailConfig
         }
 
         return static::$instance;
+    }
+
+
+    private function getServer() : ServerEnv
+    {
+        if ($this->server === null) {
+            $this->server = ServerEnv::new(
+                $_ENV["FLUX_MAIL_API_HTTPS_CERT"] ?? null,
+                $_ENV["FLUX_MAIL_API_HTTPS_KEY"] ?? null,
+                $_ENV["FLUX_MAIL_API_LISTEN"] ?? null,
+                $_ENV["FLUX_MAIL_API_PORT"] ?? null
+            );
+        }
+
+        return $this->server;
     }
 
 
@@ -61,6 +78,14 @@ class FluxMailConfig
         }
 
         return $this->smtp_server;
+    }
+
+
+    public function getInitServerService() : InitServerService
+    {
+        return InitServerService::new(
+            $this->getServer()
+        );
     }
 
 
