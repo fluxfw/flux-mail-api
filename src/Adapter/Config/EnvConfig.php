@@ -1,19 +1,16 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Config;
+namespace Fluxlabs\FluxMailApi\Adapter\Config;
 
 use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
-use Fluxlabs\FluxMailApi\Channel\FetchMails\Port\FetchMailsService;
-use Fluxlabs\FluxMailApi\Channel\InitServer\Port\InitServerService;
-use Fluxlabs\FluxMailApi\Channel\SendMail\Port\SendMailService;
 
-class FluxMailApiConfig
+class EnvConfig implements Config
 {
 
     private static ?self $instance = null;
-    private ?ServerEnv $server = null;
-    private ?MailServerEnv $mail_server = null;
-    private ?SmtpServerEnv $smtp_server = null;
+    private ?ServerConfigDto $server_config = null;
+    private ?MailServerConfigDto $mail_server_config = null;
+    private ?SmtpServerConfigDto $smtp_server_config = null;
 
 
     public static function new() : static
@@ -26,10 +23,10 @@ class FluxMailApiConfig
     }
 
 
-    private function getServer() : ServerEnv
+    public function getServerConfig() : ServerConfigDto
     {
-        if ($this->server === null) {
-            $this->server = ServerEnv::new(
+        if ($this->server_config === null) {
+            $this->server_config = ServerConfigDto::new(
                 $_ENV["FLUX_MAIL_API_HTTPS_CERT"] ?? null,
                 $_ENV["FLUX_MAIL_API_HTTPS_KEY"] ?? null,
                 $_ENV["FLUX_MAIL_API_LISTEN"] ?? null,
@@ -37,14 +34,14 @@ class FluxMailApiConfig
             );
         }
 
-        return $this->server;
+        return $this->server_config;
     }
 
 
-    private function getMailServer() : MailServerEnv
+    public function getMailServerConfig() : MailServerConfigDto
     {
-        if ($this->mail_server === null) {
-            $this->mail_server = MailServerEnv::new(
+        if ($this->mail_server_config === null) {
+            $this->mail_server_config = MailServerConfigDto::new(
                 $_ENV["FLUX_MAIL_API_FETCH_HOST"],
                 $_ENV["FLUX_MAIL_API_FETCH_PORT"],
                 $_ENV["FLUX_MAIL_API_FETCH_TYPE"],
@@ -56,14 +53,14 @@ class FluxMailApiConfig
             );
         }
 
-        return $this->mail_server;
+        return $this->mail_server_config;
     }
 
 
-    private function getSmtpServer() : SmtpServerEnv
+    public function getSmtpServerConfig() : SmtpServerConfigDto
     {
-        if ($this->smtp_server === null) {
-            $this->smtp_server = SmtpServerEnv::new(
+        if ($this->smtp_server_config === null) {
+            $this->smtp_server_config = SmtpServerConfigDto::new(
                 $_ENV["FLUX_MAIL_API_SMTP_HOST"],
                 $_ENV["FLUX_MAIL_API_SMTP_PORT"],
                 AddressDto::new(
@@ -77,30 +74,6 @@ class FluxMailApiConfig
             );
         }
 
-        return $this->smtp_server;
-    }
-
-
-    public function getInitServerService() : InitServerService
-    {
-        return InitServerService::new(
-            $this->getServer()
-        );
-    }
-
-
-    public function getFetchMailsService() : FetchMailsService
-    {
-        return FetchMailsService::new(
-            $this->getMailServer()
-        );
-    }
-
-
-    public function getSendMailService() : SendMailService
-    {
-        return SendMailService::new(
-            $this->getSmtpServer()
-        );
+        return $this->smtp_server_config;
     }
 }

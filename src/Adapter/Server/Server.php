@@ -1,44 +1,46 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Channel\InitServer\Command;
+namespace Fluxlabs\FluxMailApi\Adapter\Server;
 
-use Fluxlabs\FluxMailApi\Adapter\Api\FluxMailApi;
+use Fluxlabs\FluxMailApi\Adapter\Api\Api;
 use Fluxlabs\FluxMailApi\Adapter\Api\MailDtoBuilder;
-use Fluxlabs\FluxMailApi\Config\ServerEnv;
+use Fluxlabs\FluxMailApi\Adapter\Config\Config;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
-use Swoole\Http\Server;
+use Swoole\Http\Server as SwooleServer;
 
-class InitServerCommandHandler
+class Server
 {
 
-    private ServerEnv $server;
+    private Api $api;
+    private Config $config;
 
 
-    public static function new(ServerEnv $server) : static
+    public static function new(Api $api, Config $config) : static
     {
-        $handler = new static();
+        $server = new static();
 
-        $handler->server = $server;
+        $server->api = $api;
+        $server->config = $config;
 
-        return $handler;
+        return $server;
     }
 
 
-    public function handle(InitServerCommand $command) : void
+    public function init() : void
     {
         $options = [];
         $sock_type = SWOOLE_TCP;
 
-        if ($this->server->getHttpsCert() !== null) {
+        if ($this->config->getServerConfig()->getHttpsCert() !== null) {
             $options += [
-                "ssl_cert_file" => $this->server->getHttpsCert(),
-                "ssl_key_file"  => $this->server->getHttpsKey()
+                "ssl_cert_file" => $this->config->getServerConfig()->getHttpsCert(),
+                "ssl_key_file"  => $this->config->getServerConfig()->getHttpsKey()
             ];
             $sock_type += SWOOLE_SSL;
         }
 
-        $server = new Server($this->server->getListen(), $this->server->getPort(), SWOOLE_PROCESS, $sock_type);
+        $server = new SwooleServer($this->config->getServerConfig()->getListen(), $this->config->getServerConfig()->getPort(), SWOOLE_PROCESS, $sock_type);
 
         $server->set($options);
 
@@ -69,8 +71,7 @@ class InitServerCommandHandler
 
     private function fetchRequest(Response $response) : void
     {
-        $mails = FluxMailApi::new()
-            ->fetch()
+        $mails = $this->api->fetch()
             ->getMails();
 
         $response->header("Content-Type", "application/json;charset=utf-8");
@@ -131,14 +132,13 @@ class InitServerCommandHandler
             );
         }
 
-        FluxMailApi::new()
-            ->send(
-                $mail_builder
-                    ->withBodyText(
-                        $post_data["body_text"] ?? null
-                    )
-                    ->build()
-            );
+        $this->api->send(
+            $mail_builder
+                ->withBodyText(
+                    $post_data["body_text"] ?? null
+                )
+                ->build()
+        );
 
         $response->end();
     }
