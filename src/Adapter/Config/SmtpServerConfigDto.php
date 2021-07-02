@@ -1,10 +1,10 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Config;
+namespace Fluxlabs\FluxMailApi\Adapter\Config;
 
 use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
 
-class SmtpServerEnv
+class SmtpServerConfigDto
 {
 
     const ENCRYPTION_TYPE_SSL = "ssl";
@@ -32,17 +32,17 @@ class SmtpServerEnv
         ?string $password = null,
         ?string $auth_type = null
     ) : static {
-        $env = new static();
+        $dto = new static();
 
-        $env->host = $host;
-        $env->port = $port;
-        $env->default_from = $default_from;
-        $env->encryption_type = $encryption_type;
-        $env->user_name = $user_name;
-        $env->password = $password;
-        $env->auth_type = $auth_type;
+        $dto->host = $host;
+        $dto->port = $port;
+        $dto->default_from = $default_from;
+        $dto->encryption_type = $encryption_type;
+        $dto->user_name = $user_name;
+        $dto->password = $password;
+        $dto->auth_type = $auth_type;
 
-        return $env;
+        return $dto;
     }
 
 

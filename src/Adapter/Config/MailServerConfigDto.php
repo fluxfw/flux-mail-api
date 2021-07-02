@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Config;
+namespace Fluxlabs\FluxMailApi\Adapter\Config;
 
-class MailServerEnv
+class MailServerConfigDto
 {
 
     const TYPE_IMAP = "imap";
@@ -24,18 +24,18 @@ class MailServerEnv
 
     public static function new(string $host, int $port, string $type, string $user_name, string $password, ?string $encryption_type = null, ?string $box = null, ?bool $mark_as_read = null) : static
     {
-        $env = new static();
+        $dto = new static();
 
-        $env->host = $host;
-        $env->port = $port;
-        $env->type = $type;
-        $env->user_name = $user_name;
-        $env->password = $password;
-        $env->encryption_type = $encryption_type;
-        $env->box = $box ?? static::BOX_INBOX;
-        $env->mark_as_read = $mark_as_read ?? true;
+        $dto->host = $host;
+        $dto->port = $port;
+        $dto->type = $type;
+        $dto->user_name = $user_name;
+        $dto->password = $password;
+        $dto->encryption_type = $encryption_type;
+        $dto->box = $box ?? static::BOX_INBOX;
+        $dto->mark_as_read = $mark_as_read ?? true;
 
-        return $env;
+        return $dto;
     }
 
 

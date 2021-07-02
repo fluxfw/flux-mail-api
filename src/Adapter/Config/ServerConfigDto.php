@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Config;
+namespace Fluxlabs\FluxMailApi\Adapter\Config;
 
-class ServerEnv
+class ServerConfigDto
 {
 
     private ?string $https_cert = null;
@@ -13,14 +13,14 @@ class ServerEnv
 
     public static function new(?string $https_cert = null, ?string $https_key = null, ?string $listen = null, ?int $port = null) : static
     {
-        $env = new static();
+        $dto = new static();
 
-        $env->https_cert = $https_cert;
-        $env->https_key = $https_key;
-        $env->listen = $listen ?? "0.0.0.0";
-        $env->port = $port ?? 9501;
+        $dto->https_cert = $https_cert;
+        $dto->https_key = $https_key;
+        $dto->listen = $listen ?? "0.0.0.0";
+        $dto->port = $port ?? 9501;
 
-        return $env;
+        return $dto;
     }
 
 

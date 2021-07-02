@@ -3,7 +3,14 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Fluxlabs\FluxMailApi\Adapter\Api\FluxMailApi;
+use Fluxlabs\FluxMailApi\Adapter\Api\Api;
+use Fluxlabs\FluxMailApi\Adapter\Config\EnvConfig;
+use Fluxlabs\FluxMailApi\Adapter\Server\Server;
 
-FluxMailApi::new()
-    ->initServer();
+Server::new(
+    Api::new(
+        EnvConfig::new()
+    ),
+    EnvConfig::new()
+)
+    ->init();
