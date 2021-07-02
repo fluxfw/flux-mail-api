@@ -5,6 +5,7 @@ namespace Fluxlabs\FluxMailApi\Adapter\Server;
 use Fluxlabs\FluxMailApi\Adapter\Api\Api;
 use Fluxlabs\FluxMailApi\Adapter\Api\MailDtoBuilder;
 use Fluxlabs\FluxMailApi\Adapter\Config\Config;
+use Fluxlabs\FluxMailApi\Adapter\Config\EnvConfig;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
 use Swoole\Http\Server as SwooleServer;
@@ -16,12 +17,12 @@ class Server
     private Config $config;
 
 
-    public static function new(Api $api, Config $config) : static
+    public static function new(Api $api, ?Config $config = null) : static
     {
         $server = new static();
 
         $server->api = $api;
-        $server->config = $config;
+        $server->config = $config ?? EnvConfig::new();
 
         return $server;
     }
