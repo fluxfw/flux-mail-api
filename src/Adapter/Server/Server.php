@@ -13,16 +13,18 @@ use Swoole\Http\Server as SwooleServer;
 class Server
 {
 
-    private Api $api;
     private Config $config;
+    private Api $api;
 
 
-    public static function new(Api $api, ?Config $config = null) : static
+    public static function new(?Config $config = null, ?Api $api = null) : static
     {
         $server = new static();
 
-        $server->api = $api;
         $server->config = $config ?? EnvConfig::new();
+        $server->api = $api ?? Api::new(
+                $server->config
+            );
 
         return $server;
     }
@@ -45,7 +47,9 @@ class Server
 
         $server->set($options);
 
-        $server->on("request", function (Request $request, Response $response) : void { $this->request($request, $response); });
+        $server->on("request", function (Request $request, Response $response) : void {
+            $this->request($request, $response);
+        });
 
         $server->start();
     }
