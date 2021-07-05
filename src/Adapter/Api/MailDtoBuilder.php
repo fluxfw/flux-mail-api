@@ -9,7 +9,7 @@ class MailDtoBuilder
 
     private string $subject;
     private string $body_html;
-    private array $to;
+    private ?array $to;
     private ?array $attachments;
     private ?array $reply_to;
     private ?array $cc;
@@ -26,7 +26,7 @@ class MailDtoBuilder
 
         $builder->subject = $subject;
         $builder->body_html = $body_html;
-        $builder->to = [];
+        $builder->to = null;
         $builder->attachments = null;
         $builder->reply_to = null;
         $builder->cc = null;
@@ -46,6 +46,7 @@ class MailDtoBuilder
 
     public function addTo(string $email, ?string $name = null) : static
     {
+        $this->to ??= [];
         $this->to[] = AddressDto::new(
             $email,
             $name
