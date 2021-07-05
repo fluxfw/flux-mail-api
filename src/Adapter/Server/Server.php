@@ -137,12 +137,13 @@ class Server
             );
         }
 
+        $mail_builder = $mail_builder
+            ->withBodyText(
+                $post_data["body_text"] ?? null
+            );
+
         $this->api->send(
-            $mail_builder
-                ->withBodyText(
-                    $post_data["body_text"] ?? null
-                )
-                ->build()
+            $mail_builder->build()
         );
 
         $response->end();

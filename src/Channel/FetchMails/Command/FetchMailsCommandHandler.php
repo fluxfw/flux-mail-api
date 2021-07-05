@@ -106,7 +106,7 @@ class FetchMailsCommandHandler
                     );
                 }
 
-                $mails[] = $mail_builder
+                $mail_builder = $mail_builder
                     ->withFrom(
                         $mail->fromAddress,
                         $mail->fromName
@@ -119,8 +119,9 @@ class FetchMailsCommandHandler
                     )
                     ->withBodyText(
                         $mail->textPlain
-                    )
-                    ->build();
+                    );
+
+                $mails[] = $mail_builder->build();
             }
 
             return FetchedMailsDto::new(
