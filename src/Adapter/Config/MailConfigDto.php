@@ -2,7 +2,7 @@
 
 namespace Fluxlabs\FluxMailApi\Adapter\Config;
 
-class MailServerConfigDto
+class MailConfigDto
 {
 
     const TYPE_IMAP = "imap";

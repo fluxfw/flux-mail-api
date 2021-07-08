@@ -6,20 +6,20 @@ use DateTime;
 use Fluxlabs\FluxMailApi\Adapter\Api\AttachmentDto;
 use Fluxlabs\FluxMailApi\Adapter\Api\FetchedMailsDto;
 use Fluxlabs\FluxMailApi\Adapter\Api\MailDtoBuilder;
-use Fluxlabs\FluxMailApi\Adapter\Config\MailServerConfigDto;
+use Fluxlabs\FluxMailApi\Adapter\Config\MailConfigDto;
 use PhpImap\Mailbox;
 
 class FetchMailsCommandHandler
 {
 
-    private MailServerConfigDto $mail_server_config;
+    private MailConfigDto $mail_config;
 
 
-    public static function new(MailServerConfigDto $mail_server_config) : static
+    public static function new(MailConfigDto $mail_config) : static
     {
         $handler = new static();
 
-        $handler->mail_server_config = $mail_server_config;
+        $handler->mail_config = $mail_config;
 
         return $handler;
     }
@@ -31,17 +31,17 @@ class FetchMailsCommandHandler
         try {
             $connection_string = "{";
 
-            $connection_string .= $this->mail_server_config->getHost();
-            $connection_string .= ":" . $this->mail_server_config->getPort();
+            $connection_string .= $this->mail_config->getHost();
+            $connection_string .= ":" . $this->mail_config->getPort();
 
-            $connection_string .= "/" . $this->mail_server_config->getType();
+            $connection_string .= "/" . $this->mail_config->getType();
 
-            if ($this->mail_server_config->getEncryptionType() !== null) {
-                if ($this->mail_server_config->getEncryptionType() === MailServerConfigDto::ENCRYPTION_TYPE_TLS_AUTO) {
-                    $connection_string .= "/" . MailServerConfigDto::ENCRYPTION_TYPE_SSL;
+            if ($this->mail_config->getEncryptionType() !== null) {
+                if ($this->mail_config->getEncryptionType() === MailConfigDto::ENCRYPTION_TYPE_TLS_AUTO) {
+                    $connection_string .= "/" . MailConfigDto::ENCRYPTION_TYPE_SSL;
                 } else {
-                    $connection_string .= "/" . $this->mail_server_config->getEncryptionType();
-                    if ($this->mail_server_config->getEncryptionType() !== MailServerConfigDto::ENCRYPTION_TYPE_TLS) {
+                    $connection_string .= "/" . $this->mail_config->getEncryptionType();
+                    if ($this->mail_config->getEncryptionType() !== MailConfigDto::ENCRYPTION_TYPE_TLS) {
                         $connection_string .= "/notls";
                     }
                 }
@@ -49,14 +49,14 @@ class FetchMailsCommandHandler
 
             $connection_string .= "}";
 
-            $connection_string .= $this->mail_server_config->getBox();
+            $connection_string .= $this->mail_config->getBox();
 
-            $fetcher = new Mailbox($connection_string, $this->mail_server_config->getUserName(), $this->mail_server_config->getPassword());
+            $fetcher = new Mailbox($connection_string, $this->mail_config->getUserName(), $this->mail_config->getPassword());
 
             $mails = [];
 
             foreach ($fetcher->sortMails(SORTARRIVAL, false) as $number) {
-                $mail = $fetcher->getMail($number, $this->mail_server_config->isMarkAsRead());
+                $mail = $fetcher->getMail($number, $this->mail_config->isMarkAsRead());
 
                 $mail_builder = MailDtoBuilder::new(
                     $mail->subject,
