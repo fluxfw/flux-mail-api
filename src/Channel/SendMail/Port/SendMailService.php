@@ -3,21 +3,21 @@
 namespace Fluxlabs\FluxMailApi\Channel\SendMail\Port;
 
 use Fluxlabs\FluxMailApi\Adapter\Api\MailDto;
-use Fluxlabs\FluxMailApi\Adapter\Config\SmtpServerConfigDto;
+use Fluxlabs\FluxMailApi\Adapter\Config\SmtpConfigDto;
 use Fluxlabs\FluxMailApi\Channel\SendMail\Command\SendMailCommand;
 use Fluxlabs\FluxMailApi\Channel\SendMail\Command\SendMailCommandHandler;
 
 class SendMailService
 {
 
-    private SmtpServerConfigDto $smtp_server_config;
+    private SmtpConfigDto $smtp_config;
 
 
-    public static function new(SmtpServerConfigDto $smtp_server_config) : static
+    public static function new(SmtpConfigDto $smtp_config) : static
     {
         $service = new static();
 
-        $service->smtp_server_config = $smtp_server_config;
+        $service->smtp_config = $smtp_config;
 
         return $service;
     }
@@ -26,7 +26,7 @@ class SendMailService
     public function send(MailDto $mail) : void
     {
         SendMailCommandHandler::new(
-            $this->smtp_server_config
+            $this->smtp_config
         )
             ->handle(
                 SendMailCommand::new(

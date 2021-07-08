@@ -4,7 +4,7 @@ namespace Fluxlabs\FluxMailApi\Adapter\Config;
 
 use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
 
-class SmtpServerConfigDto
+class SmtpConfigDto
 {
 
     const ENCRYPTION_TYPE_SSL = "ssl";

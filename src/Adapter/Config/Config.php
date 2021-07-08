@@ -8,8 +8,8 @@ interface Config
     public function getServerConfig() : ServerConfigDto;
 
 
-    public function getMailServerConfig() : MailServerConfigDto;
+    public function getMailConfig() : MailConfigDto;
 
 
-    public function getSmtpServerConfig() : SmtpServerConfigDto;
+    public function getSmtpConfig() : SmtpConfigDto;
 }

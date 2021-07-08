@@ -3,20 +3,20 @@
 namespace Fluxlabs\FluxMailApi\Channel\SendMail\Command;
 
 use Fluxlabs\FluxMailApi\Adapter\Api\AttachmentDto;
-use Fluxlabs\FluxMailApi\Adapter\Config\SmtpServerConfigDto;
+use Fluxlabs\FluxMailApi\Adapter\Config\SmtpConfigDto;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SendMailCommandHandler
 {
 
-    private SmtpServerConfigDto $smtp_server_config;
+    private SmtpConfigDto $smtp_config;
 
 
-    public static function new(SmtpServerConfigDto $smtp_server_config) : static
+    public static function new(SmtpConfigDto $smtp_config) : static
     {
         $handler = new static();
 
-        $handler->smtp_server_config = $smtp_server_config;
+        $handler->smtp_config = $smtp_config;
 
         return $handler;
     }
@@ -29,21 +29,21 @@ class SendMailCommandHandler
             $sender = new PHPMailer(true);
 
             $sender->isSMTP();
-            $sender->Host = $this->smtp_server_config->getHost();
-            $sender->Port = $this->smtp_server_config->getPort();
+            $sender->Host = $this->smtp_config->getHost();
+            $sender->Port = $this->smtp_config->getPort();
 
-            if ($this->smtp_server_config->getEncryptionType() === SmtpServerConfigDto::ENCRYPTION_TYPE_TLS_AUTO) {
-                $sender->SMTPSecure = SmtpServerConfigDto::ENCRYPTION_TYPE_SSL;
+            if ($this->smtp_config->getEncryptionType() === SmtpConfigDto::ENCRYPTION_TYPE_TLS_AUTO) {
+                $sender->SMTPSecure = SmtpConfigDto::ENCRYPTION_TYPE_SSL;
                 $sender->SMTPAutoTLS = true;
             } else {
-                $sender->SMTPSecure = $this->smtp_server_config->getEncryptionType();
+                $sender->SMTPSecure = $this->smtp_config->getEncryptionType();
                 $sender->SMTPAutoTLS = false;
             }
 
-            $sender->SMTPAuth = ($this->smtp_server_config->getAuthType() !== null || $this->smtp_server_config->getUserName() !== null || $this->smtp_server_config->getPassword() !== null);
-            $sender->Username = $this->smtp_server_config->getUserName();
-            $sender->Password = $this->smtp_server_config->getPassword();
-            $sender->AuthType = $this->smtp_server_config->getAuthType();
+            $sender->SMTPAuth = ($this->smtp_config->getAuthType() !== null || $this->smtp_config->getUserName() !== null || $this->smtp_config->getPassword() !== null);
+            $sender->Username = $this->smtp_config->getUserName();
+            $sender->Password = $this->smtp_config->getPassword();
+            $sender->AuthType = $this->smtp_config->getAuthType();
 
             $sender->Subject = $command->getMail()->getSubject();
 
@@ -81,7 +81,7 @@ class SendMailCommandHandler
                 $sender->addBCC($bcc->getEmail(), $bcc->getName());
             }
 
-            $from = $command->getMail()->getFrom() ?? $this->smtp_server_config->getDefaultFrom();
+            $from = $command->getMail()->getFrom() ?? $this->smtp_config->getDefaultFrom();
             $sender->setFrom($from->getEmail(), $from->getName());
 
             $sender->MessageDate = $command->getMail()->getTime()->format("D, j M Y H:i:s O");

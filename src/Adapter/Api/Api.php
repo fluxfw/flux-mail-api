@@ -26,7 +26,7 @@ class Api
     public function fetch() : FetchedMailsDto
     {
         return FetchMailsService::new(
-            $this->config->getMailServerConfig()
+            $this->config->getMailConfig()
         )
             ->fetch();
     }
@@ -35,7 +35,7 @@ class Api
     public function send(MailDto $mail) : void
     {
         SendMailService::new(
-            $this->config->getSmtpServerConfig()
+            $this->config->getSmtpConfig()
         )
             ->send(
                 $mail
