@@ -160,8 +160,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.0",
-        "ext-json": "*",
         "ext-imap": "*",
+        "ext-json": "*",
         "ext-swoole": "*"
     },
     "platform-dev": [],
