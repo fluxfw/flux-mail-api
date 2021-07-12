@@ -11,8 +11,8 @@
   "license": "GPL-3.0-only",
   "require": {
     "php": ">=8.0",
-    "ext-json": "*",
     "ext-imap": "*",
+    "ext-json": "*",
     "ext-swoole": "*",
     "phpmailer/phpmailer": "6.5.0",
     "php-imap/php-imap": "4.1.0"
