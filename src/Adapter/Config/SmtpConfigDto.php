@@ -7,20 +7,20 @@ use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
 class SmtpConfigDto
 {
 
+    const AUTH_TYPE_CRAM_MD5 = "CRAM-MD5";
+    const AUTH_TYPE_LOGIN = "LOGIN";
+    const AUTH_TYPE_PLAIN = "PLAIN";
+    const AUTH_TYPE_XOAUTH2 = "XOAUTH2";
     const ENCRYPTION_TYPE_SSL = "ssl";
     const ENCRYPTION_TYPE_TLS = "tls";
     const ENCRYPTION_TYPE_TLS_AUTO = "tls-auto";
-    const AUTH_TYPE_PLAIN = "PLAIN";
-    const AUTH_TYPE_LOGIN = "LOGIN";
-    const AUTH_TYPE_CRAM_MD5 = "CRAM-MD5";
-    const AUTH_TYPE_XOAUTH2 = "XOAUTH2";
-    private string $host;
-    private int $port;
+    private ?string $auth_type;
     private AddressDto $default_from;
     private ?string $encryption_type;
-    private ?string $user_name;
+    private string $host;
     private ?string $password;
-    private ?string $auth_type;
+    private int $port;
+    private ?string $user_name;
 
 
     public static function new(
@@ -46,15 +46,9 @@ class SmtpConfigDto
     }
 
 
-    public function getHost() : string
+    public function getAuthType() : ?string
     {
-        return $this->host;
-    }
-
-
-    public function getPort() : int
-    {
-        return $this->port;
+        return $this->auth_type;
     }
 
 
@@ -70,9 +64,9 @@ class SmtpConfigDto
     }
 
 
-    public function getUserName() : ?string
+    public function getHost() : string
     {
-        return $this->user_name;
+        return $this->host;
     }
 
 
@@ -82,8 +76,14 @@ class SmtpConfigDto
     }
 
 
-    public function getAuthType() : ?string
+    public function getPort() : int
     {
-        return $this->auth_type;
+        return $this->port;
+    }
+
+
+    public function getUserName() : ?string
+    {
+        return $this->user_name;
     }
 }

@@ -8,17 +8,17 @@ use JsonSerializable;
 class MailDto implements JsonSerializable
 {
 
-    private string $subject;
-    private string $body_html;
-    private array $to;
     private array $attachments;
-    private array $reply_to;
-    private array $cc;
     private array $bcc;
-    private ?AddressDto $from;
-    private DateTime $time;
-    private ?string $message_id;
+    private string $body_html;
     private string $body_text;
+    private array $cc;
+    private ?AddressDto $from;
+    private ?string $message_id;
+    private array $reply_to;
+    private string $subject;
+    private DateTime $time;
+    private array $to;
 
 
     public static function new(
@@ -52,27 +52,6 @@ class MailDto implements JsonSerializable
     }
 
 
-    public function getSubject() : string
-    {
-        return $this->subject;
-    }
-
-
-    public function getBodyHtml() : string
-    {
-        return $this->body_html;
-    }
-
-
-    /**
-     * @return AddressDto[]
-     */
-    public function getTo() : array
-    {
-        return $this->to;
-    }
-
-
     /**
      * @return AttachmentDto[]
      */
@@ -85,9 +64,21 @@ class MailDto implements JsonSerializable
     /**
      * @return AddressDto[]
      */
-    public function getReplyTo() : array
+    public function getBcc() : array
     {
-        return $this->reply_to;
+        return $this->bcc;
+    }
+
+
+    public function getBodyHtml() : string
+    {
+        return $this->body_html;
+    }
+
+
+    public function getBodyText() : string
+    {
+        return $this->body_text;
     }
 
 
@@ -100,24 +91,9 @@ class MailDto implements JsonSerializable
     }
 
 
-    /**
-     * @return AddressDto[]
-     */
-    public function getBcc() : array
-    {
-        return $this->bcc;
-    }
-
-
     public function getFrom() : ?AddressDto
     {
         return $this->from;
-    }
-
-
-    public function getTime() : DateTime
-    {
-        return $this->time;
     }
 
 
@@ -127,9 +103,33 @@ class MailDto implements JsonSerializable
     }
 
 
-    public function getBodyText() : string
+    /**
+     * @return AddressDto[]
+     */
+    public function getReplyTo() : array
     {
-        return $this->body_text;
+        return $this->reply_to;
+    }
+
+
+    public function getSubject() : string
+    {
+        return $this->subject;
+    }
+
+
+    public function getTime() : DateTime
+    {
+        return $this->time;
+    }
+
+
+    /**
+     * @return AddressDto[]
+     */
+    public function getTo() : array
+    {
+        return $this->to;
     }
 
 

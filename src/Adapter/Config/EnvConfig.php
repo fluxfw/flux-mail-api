@@ -8,8 +8,8 @@ class EnvConfig implements Config
 {
 
     private static ?self $instance = null;
-    private ?ServerConfigDto $server_config = null;
     private ?MailConfigDto $mail_config = null;
+    private ?ServerConfigDto $server_config = null;
     private ?SmtpConfigDto $smtp_config = null;
 
 
@@ -18,19 +18,6 @@ class EnvConfig implements Config
         static::$instance ??= new static();
 
         return static::$instance;
-    }
-
-
-    public function getServerConfig() : ServerConfigDto
-    {
-        $this->server_config ??= ServerConfigDto::new(
-            $_ENV["FLUX_MAIL_API_SERVER_HTTPS_CERT"] ?? null,
-            $_ENV["FLUX_MAIL_API_SERVER_HTTPS_KEY"] ?? null,
-            $_ENV["FLUX_MAIL_API_SERVER_LISTEN"] ?? null,
-            $_ENV["FLUX_MAIL_API_SERVER_PORT"] ?? null
-        );
-
-        return $this->server_config;
     }
 
 
@@ -48,6 +35,19 @@ class EnvConfig implements Config
         );
 
         return $this->mail_config;
+    }
+
+
+    public function getServerConfig() : ServerConfigDto
+    {
+        $this->server_config ??= ServerConfigDto::new(
+            $_ENV["FLUX_MAIL_API_SERVER_HTTPS_CERT"] ?? null,
+            $_ENV["FLUX_MAIL_API_SERVER_HTTPS_KEY"] ?? null,
+            $_ENV["FLUX_MAIL_API_SERVER_LISTEN"] ?? null,
+            $_ENV["FLUX_MAIL_API_SERVER_PORT"] ?? null
+        );
+
+        return $this->server_config;
     }
 
 

@@ -7,17 +7,17 @@ use DateTime;
 class MailDtoBuilder
 {
 
-    private string $subject;
-    private string $body_html;
-    private ?array $to;
     private ?array $attachments;
-    private ?array $reply_to;
-    private ?array $cc;
     private ?array $bcc;
-    private ?AddressDto $from;
-    private ?DateTime $time;
-    private ?string $message_id;
+    private string $body_html;
     private ?string $body_text;
+    private ?array $cc;
+    private ?AddressDto $from;
+    private ?string $message_id;
+    private ?array $reply_to;
+    private string $subject;
+    private ?DateTime $time;
+    private ?array $to;
 
 
     public static function new(string $subject, string $body_html, string $to_email, ?string $to_name = null) : static
@@ -44,18 +44,6 @@ class MailDtoBuilder
     }
 
 
-    public function addTo(string $email, ?string $name = null) : static
-    {
-        $this->to ??= [];
-        $this->to[] = AddressDto::new(
-            $email,
-            $name
-        );
-
-        return $this;
-    }
-
-
     public function addAttachment(string $name, string $data, ?string $data_encoding = null, ?string $data_type = null) : static
     {
         $this->attachments ??= [];
@@ -70,10 +58,10 @@ class MailDtoBuilder
     }
 
 
-    public function addReplyTo(string $email, ?string $name = null) : static
+    public function addBcc(string $email, ?string $name = null) : static
     {
-        $this->reply_to ??= [];
-        $this->reply_to[] = AddressDto::new(
+        $this->bcc ??= [];
+        $this->bcc[] = AddressDto::new(
             $email,
             $name
         );
@@ -94,10 +82,10 @@ class MailDtoBuilder
     }
 
 
-    public function addBcc(string $email, ?string $name = null) : static
+    public function addReplyTo(string $email, ?string $name = null) : static
     {
-        $this->bcc ??= [];
-        $this->bcc[] = AddressDto::new(
+        $this->reply_to ??= [];
+        $this->reply_to[] = AddressDto::new(
             $email,
             $name
         );
@@ -106,36 +94,13 @@ class MailDtoBuilder
     }
 
 
-    public function withFrom(string $email, ?string $name = null) : static
+    public function addTo(string $email, ?string $name = null) : static
     {
-        $this->from = AddressDto::new(
+        $this->to ??= [];
+        $this->to[] = AddressDto::new(
             $email,
             $name
         );
-
-        return $this;
-    }
-
-
-    public function withTime(DateTime $time) : static
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
-
-    public function withMessageId(string $message_id) : static
-    {
-        $this->message_id = $message_id;
-
-        return $this;
-    }
-
-
-    public function withBodyText(string $body_text) : static
-    {
-        $this->body_text = $body_text;
 
         return $this;
     }
@@ -156,5 +121,40 @@ class MailDtoBuilder
             $this->message_id,
             $this->body_text
         );
+    }
+
+
+    public function withBodyText(string $body_text) : static
+    {
+        $this->body_text = $body_text;
+
+        return $this;
+    }
+
+
+    public function withFrom(string $email, ?string $name = null) : static
+    {
+        $this->from = AddressDto::new(
+            $email,
+            $name
+        );
+
+        return $this;
+    }
+
+
+    public function withMessageId(string $message_id) : static
+    {
+        $this->message_id = $message_id;
+
+        return $this;
+    }
+
+
+    public function withTime(DateTime $time) : static
+    {
+        $this->time = $time;
+
+        return $this;
     }
 }

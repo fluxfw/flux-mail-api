@@ -13,8 +13,8 @@ use Swoole\Http\Server as SwooleServer;
 class Server
 {
 
-    private Config $config;
     private Api $api;
+    private Config $config;
 
 
     public static function new(?Config $config = null, ?Api $api = null) : static
@@ -55,6 +55,17 @@ class Server
     }
 
 
+    private function fetchRequest(Response $response) : void
+    {
+        $mails = $this->api->fetch()
+            ->getMails();
+
+        $response->header("Content-Type", "application/json;charset=utf-8");
+        $response->write(json_encode($mails));
+        $response->end();
+    }
+
+
     private function request(Request $request, Response $response) : void
     {
         switch (true) {
@@ -71,17 +82,6 @@ class Server
                 $response->end();
                 break;
         }
-    }
-
-
-    private function fetchRequest(Response $response) : void
-    {
-        $mails = $this->api->fetch()
-            ->getMails();
-
-        $response->header("Content-Type", "application/json;charset=utf-8");
-        $response->write(json_encode($mails));
-        $response->end();
     }
 
 
