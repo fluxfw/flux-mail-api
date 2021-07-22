@@ -5,21 +5,21 @@ namespace Fluxlabs\FluxMailApi\Adapter\Config;
 class MailConfigDto
 {
 
-    const TYPE_IMAP = "imap";
-    const TYPE_POP3 = "pop3";
-    const TYPE_NNTP = "nntp";
+    const BOX_INBOX = "INBOX";
     const ENCRYPTION_TYPE_SSL = "ssl";
     const ENCRYPTION_TYPE_TLS = "tls";
     const ENCRYPTION_TYPE_TLS_AUTO = "tls-auto";
-    const BOX_INBOX = "INBOX";
+    const TYPE_IMAP = "imap";
+    const TYPE_NNTP = "nntp";
+    const TYPE_POP3 = "pop3";
+    private string $box;
+    private ?string $encryption_type;
     private string $host;
+    private bool $mark_as_read;
+    private string $password;
     private int $port;
     private string $type;
     private string $user_name;
-    private string $password;
-    private ?string $encryption_type;
-    private string $box;
-    private bool $mark_as_read;
 
 
     public static function new(string $host, int $port, string $type, string $user_name, string $password, ?string $encryption_type = null, ?string $box = null, ?bool $mark_as_read = null) : static
@@ -39,9 +39,27 @@ class MailConfigDto
     }
 
 
+    public function getBox() : string
+    {
+        return $this->box;
+    }
+
+
+    public function getEncryptionType() : ?string
+    {
+        return $this->encryption_type;
+    }
+
+
     public function getHost() : string
     {
         return $this->host;
+    }
+
+
+    public function getPassword() : string
+    {
+        return $this->password;
     }
 
 
@@ -60,24 +78,6 @@ class MailConfigDto
     public function getUserName() : string
     {
         return $this->user_name;
-    }
-
-
-    public function getPassword() : string
-    {
-        return $this->password;
-    }
-
-
-    public function getEncryptionType() : ?string
-    {
-        return $this->encryption_type;
-    }
-
-
-    public function getBox() : string
-    {
-        return $this->box;
     }
 
 
