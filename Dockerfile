@@ -1,4 +1,4 @@
-FROM phpswoole/swoole:4.6-php8.0-alpine
+FROM phpswoole/swoole:4.7-php8.0-alpine
 
 LABEL org.opencontainers.image.source="https://github.com/fluxapps/FluxMailApi"
 LABEL maintainer="fluxlabs <support@fluxlabs.ch> (https://fluxlabs.ch)"
