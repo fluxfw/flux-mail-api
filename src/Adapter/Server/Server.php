@@ -61,7 +61,7 @@ class Server
             ->getMails();
 
         $response->header("Content-Type", "application/json;charset=utf-8");
-        $response->write(json_encode($mails));
+        $response->write(json_encode($mails, JSON_UNESCAPED_SLASHES));
         $response->end();
     }
 
