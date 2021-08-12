@@ -21,7 +21,7 @@ class AttachmentDto implements JsonSerializable
 
         $dto->name = $name;
         $dto->data = $data;
-        $dto->data_encoding = $data_encoding ?? self::DATA_ENCODING_PLAIN;
+        $dto->data_encoding = $data_encoding ?? static::DATA_ENCODING_PLAIN;
         $dto->data_type = $data_type;
 
         return $dto;
