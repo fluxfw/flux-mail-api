@@ -5,8 +5,8 @@ namespace Fluxlabs\FluxMailApi\Adapter\Server;
 use Fluxlabs\FluxMailApi\Adapter\Api\Api;
 use Fluxlabs\FluxMailApi\Adapter\Config\Config;
 use Fluxlabs\FluxMailApi\Adapter\Config\EnvConfig;
-use Fluxlabs\FluxRestApi\Handler\SwooleHandler;
-use Fluxlabs\FluxRestApi\Route\Collector\FolderRouteCollector;
+use Fluxlabs\FluxRestApi\Adapter\Collector\FolderRouteCollector;
+use Fluxlabs\FluxRestApi\Adapter\Handler\SwooleHandler;
 use Swoole\Http\Server as SwooleServer;
 
 class Server

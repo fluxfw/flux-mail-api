@@ -18,9 +18,6 @@ class FetchedMailsDto
     }
 
 
-    /**
-     * @return MailDto[]
-     */
     public function getMails() : array
     {
         return $this->mails;
