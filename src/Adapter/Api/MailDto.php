@@ -2,7 +2,6 @@
 
 namespace Fluxlabs\FluxMailApi\Adapter\Api;
 
-use DateTime;
 use JsonSerializable;
 
 class MailDto implements JsonSerializable
@@ -17,7 +16,7 @@ class MailDto implements JsonSerializable
     private ?string $message_id;
     private array $reply_to;
     private string $subject;
-    private DateTime $time;
+    private int $time;
     private array $to;
 
 
@@ -30,7 +29,7 @@ class MailDto implements JsonSerializable
         ?array $cc = null,
         ?array $bcc = null,
         ?AddressDto $from = null,
-        ?DateTime $time = null,
+        ?int $time = null,
         ?string $message_id = null,
         ?string $body_text = null
     ) : static {
@@ -44,7 +43,7 @@ class MailDto implements JsonSerializable
         $dto->cc = $cc ?? [];
         $dto->bcc = $bcc ?? [];
         $dto->from = $from;
-        $dto->time = $time ?? new DateTime();
+        $dto->time = $time ?? time();
         $dto->message_id = $message_id;
         $dto->body_text = $body_text ?? "";
 
@@ -52,18 +51,12 @@ class MailDto implements JsonSerializable
     }
 
 
-    /**
-     * @return AttachmentDto[]
-     */
     public function getAttachments() : array
     {
         return $this->attachments;
     }
 
 
-    /**
-     * @return AddressDto[]
-     */
     public function getBcc() : array
     {
         return $this->bcc;
@@ -82,9 +75,6 @@ class MailDto implements JsonSerializable
     }
 
 
-    /**
-     * @return AddressDto[]
-     */
     public function getCc() : array
     {
         return $this->cc;
@@ -103,9 +93,6 @@ class MailDto implements JsonSerializable
     }
 
 
-    /**
-     * @return AddressDto[]
-     */
     public function getReplyTo() : array
     {
         return $this->reply_to;
@@ -118,15 +105,12 @@ class MailDto implements JsonSerializable
     }
 
 
-    public function getTime() : DateTime
+    public function getTime() : int
     {
         return $this->time;
     }
 
 
-    /**
-     * @return AddressDto[]
-     */
     public function getTo() : array
     {
         return $this->to;
@@ -135,10 +119,6 @@ class MailDto implements JsonSerializable
 
     public function jsonSerialize() : array
     {
-        $dto = get_object_vars($this);
-
-        $dto["time"] = $this->time->getTimestamp();
-
-        return $dto;
+        return get_object_vars($this);
     }
 }

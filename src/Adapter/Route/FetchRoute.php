@@ -4,6 +4,7 @@ namespace Fluxlabs\FluxMailApi\Adapter\Route;
 
 use Fluxlabs\FluxMailApi\Adapter\Api\Api;
 use Fluxlabs\FluxRestApi\Body\JsonBodyDto;
+use Fluxlabs\FluxRestApi\Method\Method;
 use Fluxlabs\FluxRestApi\Request\RequestDto;
 use Fluxlabs\FluxRestApi\Response\ResponseDto;
 use Fluxlabs\FluxRestApi\Route\Route;
@@ -24,7 +25,13 @@ class FetchRoute implements Route
     }
 
 
-    public function getBodyType() : ?string
+    public function getDocuRequestBodyTypes() : ?array
+    {
+        return null;
+    }
+
+
+    public function getDocuRequestQueryParams() : ?array
     {
         return null;
     }
@@ -32,7 +39,7 @@ class FetchRoute implements Route
 
     public function getMethod() : string
     {
-        return "GET";
+        return Method::GET;
     }
 
 
@@ -42,7 +49,7 @@ class FetchRoute implements Route
     }
 
 
-    public function handle(RequestDto $request) : ResponseDto
+    public function handle(RequestDto $request) : ?ResponseDto
     {
         return ResponseDto::new(
             JsonBodyDto::new(
