@@ -9,7 +9,6 @@ use Fluxlabs\FluxMailApi\Adapter\Api\FetchedMailsDto;
 use Fluxlabs\FluxMailApi\Adapter\Api\MailDto;
 use Fluxlabs\FluxMailApi\Adapter\Config\MailConfigDto;
 use PhpImap\Mailbox;
-use stdClass;
 
 class FetchMailsCommand
 {
@@ -64,7 +63,7 @@ class FetchMailsCommand
                     $mail->subject,
                     $mail->textHtml,
                     array_map([AddressDto::class, "new"], array_keys($mail->to), $mail->to),
-                    array_map(fn(stdClass $attachment) : AttachmentDto => AttachmentDto::new(
+                    array_map(fn(object $attachment) : AttachmentDto => AttachmentDto::new(
                         $attachment->name,
                         base64_encode($attachment->getContents()),
                         AttachmentDto::DATA_ENCODING_BASE64,
