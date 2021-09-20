@@ -14,7 +14,6 @@ use Fluxlabs\FluxRestApi\Request\RequestDto;
 use Fluxlabs\FluxRestApi\Response\ResponseDto;
 use Fluxlabs\FluxRestApi\Route\Route;
 use Fluxlabs\FluxRestApi\Status\Status;
-use stdClass;
 
 class SendRoute implements Route
 {
@@ -69,38 +68,36 @@ class SendRoute implements Route
             );
         }
 
-        $post_data = $request->getParsedBody()->getData();
-
         $this->api->send(
             MailDto::new(
-                $post_data->subject,
-                $post_data->body_html,
-                array_map(fn(stdClass $address) : AddressDto => AddressDto::new(
+                $request->getParsedBody()->getData()->subject,
+                $request->getParsedBody()->getData()->body_html,
+                array_map(fn(object $address) : AddressDto => AddressDto::new(
                     $address->email,
                     $address->name ?? null
-                ), $post_data->to ?? []),
-                array_map(fn(stdClass $attachment) : AttachmentDto => AttachmentDto::new(
+                ), $request->getParsedBody()->getData()->to ?? []),
+                array_map(fn(object $attachment) : AttachmentDto => AttachmentDto::new(
                     $attachment->name,
                     $attachment->data,
                     $attachment->data_encoding ?? null,
                     $attachment->data_type ?? null
-                ), $post_data->attachments ?? []),
-                array_map(fn(stdClass $address) : AddressDto => AddressDto::new(
+                ), $request->getParsedBody()->getData()->attachments ?? []),
+                array_map(fn(object $address) : AddressDto => AddressDto::new(
                     $address->email,
                     $address->name ?? null
-                ), $post_data->reply_to ?? []),
-                array_map(fn(stdClass $address) : AddressDto => AddressDto::new(
+                ), $request->getParsedBody()->getData()->reply_to ?? []),
+                array_map(fn(object $address) : AddressDto => AddressDto::new(
                     $address->email,
                     $address->name ?? null
-                ), $post_data->cc ?? []),
-                array_map(fn(stdClass $address) : AddressDto => AddressDto::new(
+                ), $request->getParsedBody()->getData()->cc ?? []),
+                array_map(fn(object $address) : AddressDto => AddressDto::new(
                     $address->email,
                     $address->name ?? null
-                ), $post_data->bbc ?? []),
+                ), $request->getParsedBody()->getData()->bbc ?? []),
                 null,
                 null,
                 null,
-                $post_data->body_text ?? null
+                $request->getParsedBody()->getData()->body_text ?? null
             )
         );
 
