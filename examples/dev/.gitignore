@@ -1,6 +1,6 @@
 *
-!docker-compose.yml
 !.gitignore
+!docker-compose.yml
 !fetch.sh
 !send.sh
 !send-output.sh
