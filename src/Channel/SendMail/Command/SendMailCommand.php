@@ -1,11 +1,11 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Channel\SendMail\Command;
+namespace FluxMailApi\Channel\SendMail\Command;
 
 use DateTime;
-use Fluxlabs\FluxMailApi\Adapter\Api\AttachmentDto;
-use Fluxlabs\FluxMailApi\Adapter\Api\MailDto;
-use Fluxlabs\FluxMailApi\Adapter\Config\SmtpConfigDto;
+use FluxMailApi\Adapter\Api\AttachmentDto;
+use FluxMailApi\Adapter\Api\MailDto;
+use FluxMailApi\Adapter\Config\SmtpConfigDto;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SendMailCommand

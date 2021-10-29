@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Adapter\Config;
+namespace FluxMailApi\Adapter\Config;
 
 class MailConfigDto
 {

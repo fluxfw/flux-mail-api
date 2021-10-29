@@ -1,8 +1,8 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Adapter\Config;
+namespace FluxMailApi\Adapter\Config;
 
-use Fluxlabs\FluxMailApi\Adapter\Api\AddressDto;
+use FluxMailApi\Adapter\Api\AddressDto;
 
 class EnvConfig implements Config
 {

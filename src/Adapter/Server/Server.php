@@ -1,12 +1,12 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Adapter\Server;
+namespace FluxMailApi\Adapter\Server;
 
-use Fluxlabs\FluxMailApi\Adapter\Api\Api;
-use Fluxlabs\FluxMailApi\Adapter\Config\Config;
-use Fluxlabs\FluxMailApi\Adapter\Config\EnvConfig;
-use Fluxlabs\FluxRestApi\Adapter\Collector\FolderRouteCollector;
-use Fluxlabs\FluxRestApi\Adapter\Handler\SwooleHandler;
+use FluxMailApi\Adapter\Api\Api;
+use FluxMailApi\Adapter\Config\Config;
+use FluxMailApi\Adapter\Config\EnvConfig;
+use FluxRestApi\Adapter\Collector\FolderRouteCollector;
+use FluxRestApi\Adapter\Handler\SwooleHandler;
 use Swoole\Http\Server as SwooleServer;
 
 class Server

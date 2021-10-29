@@ -1,10 +1,10 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Channel\SendMail\Port;
+namespace FluxMailApi\Channel\SendMail\Port;
 
-use Fluxlabs\FluxMailApi\Adapter\Api\MailDto;
-use Fluxlabs\FluxMailApi\Adapter\Config\SmtpConfigDto;
-use Fluxlabs\FluxMailApi\Channel\SendMail\Command\SendMailCommand;
+use FluxMailApi\Adapter\Api\MailDto;
+use FluxMailApi\Adapter\Config\SmtpConfigDto;
+use FluxMailApi\Channel\SendMail\Command\SendMailCommand;
 
 class SendMailService
 {
