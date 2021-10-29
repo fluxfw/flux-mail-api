@@ -1,11 +1,11 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Adapter\Api;
+namespace FluxMailApi\Adapter\Api;
 
-use Fluxlabs\FluxMailApi\Adapter\Config\Config;
-use Fluxlabs\FluxMailApi\Adapter\Config\EnvConfig;
-use Fluxlabs\FluxMailApi\Channel\FetchMails\Port\FetchMailsService;
-use Fluxlabs\FluxMailApi\Channel\SendMail\Port\SendMailService;
+use FluxMailApi\Adapter\Config\Config;
+use FluxMailApi\Adapter\Config\EnvConfig;
+use FluxMailApi\Channel\FetchMails\Port\FetchMailsService;
+use FluxMailApi\Channel\SendMail\Port\SendMailService;
 
 class Api
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fluxlabs\FluxMailApi\Adapter\Api;
+namespace FluxMailApi\Adapter\Api;
 
 use JsonSerializable;
 
