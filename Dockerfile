@@ -12,9 +12,6 @@ COPY . /FluxMailApi
 
 ENTRYPOINT ["/FluxMailApi/bin/entrypoint.php"]
 
-# TODO: Remove ignore-platform-reqs and patch (PHP8 support of php-imap/php-imap library)
-# https://github.com/barbushin/php-imap/issues/563#issuecomment-867584500
-RUN composer install -d /FluxMailApi --no-dev --ignore-platform-reqs
-RUN sed -i "s/\$reverse = (int) \$reverse;/\$reverse = (bool) \$reverse;/" /FluxMailApi/vendor/php-imap/php-imap/src/PhpImap/Imap.php
+RUN /FluxMailApi/bin/build.sh
 
 EXPOSE 9501
