@@ -1,0 +1,9 @@
+{
+  "description": "Fetch or send mails",
+  "keywords": [
+    "fetch",
+    "mail",
+    "send"
+  ],
+  "homepage": "https://github.com/fluxapps/FluxMailApi"
+}
