@@ -5,9 +5,9 @@ namespace FluxMailApi;
 require_once __DIR__ . "/../libs/FluxRestApi/autoload.php";
 
 use FluxAutoloadApi\Adapter\Autoload\ComposerAutoload;
-use FluxAutoloadApi\Adapter\Autoload\PhpExtChecker;
-use FluxAutoloadApi\Adapter\Autoload\PhpVersionChecker;
 use FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
+use FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
+use FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
 
 PhpVersionChecker::new(
     ">=8.0",
