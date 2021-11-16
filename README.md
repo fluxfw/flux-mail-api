@@ -1,4 +1,4 @@
-# FluxMailApi
+# flux-mail-api
 
 ## Environment variables
 
