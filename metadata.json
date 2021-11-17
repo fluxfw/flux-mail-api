@@ -1,9 +1,17 @@
 {
   "description": "Fetch or send mails",
   "keywords": [
+    "alpine",
+    "api",
+    "docker",
     "fetch",
+    "imap",
     "mail",
-    "send"
+    "php",
+    "rest",
+    "send",
+    "smtp",
+    "swoole"
   ],
   "homepage": "https://github.com/fluxapps/flux-mail-api"
 }
