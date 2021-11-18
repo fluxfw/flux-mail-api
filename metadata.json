@@ -1,6 +1,6 @@
 {
   "description": "Fetch or send mails",
-  "keywords": [
+  "topics": [
     "alpine",
     "api",
     "docker",
