@@ -62,8 +62,8 @@ class FetchMailsCommand
                 $mail = $fetcher->getMail($number, $this->mail_config->isMarkAsRead());
 
                 $mails[] = MailDto::new(
-                    $mail->subject,
-                    $mail->textHtml,
+                    $mail->subject ?? "",
+                    $mail->textHtml ?? "",
                     array_map([AddressDto::class, "new"], array_keys($mail->to), $mail->to),
                     array_map(fn(object $attachment) : AttachmentDto => AttachmentDto::new(
                         $attachment->name,
@@ -81,7 +81,7 @@ class FetchMailsCommand
                     ),
                     (new DateTime($mail->date))->getTimestamp(),
                     $mail->messageId,
-                    $mail->textPlain
+                    $mail->textPlain ?? null
                 );
             }
 
