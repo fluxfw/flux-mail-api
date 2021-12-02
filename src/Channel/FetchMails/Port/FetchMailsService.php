@@ -9,7 +9,7 @@ use FluxMailApi\Channel\FetchMails\Command\FetchMailsCommand;
 class FetchMailsService
 {
 
-    private MailConfigDto $mail_config;
+    private readonly MailConfigDto $mail_config;
 
 
     public static function new(MailConfigDto $mail_config) : static

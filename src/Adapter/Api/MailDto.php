@@ -7,17 +7,17 @@ use JsonSerializable;
 class MailDto implements JsonSerializable
 {
 
-    private array $attachments;
-    private array $bcc;
-    private string $body_html;
-    private string $body_text;
-    private array $cc;
-    private ?AddressDto $from;
-    private ?string $message_id;
-    private array $reply_to;
-    private string $subject;
-    private int $time;
-    private array $to;
+    private readonly array $attachments;
+    private readonly array $bcc;
+    private readonly string $body_html;
+    private readonly string $body_text;
+    private readonly array $cc;
+    private readonly ?AddressDto $from;
+    private readonly ?string $message_id;
+    private readonly array $reply_to;
+    private readonly string $subject;
+    private readonly int $time;
+    private readonly array $to;
 
 
     public static function new(

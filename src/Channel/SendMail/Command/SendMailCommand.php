@@ -3,15 +3,16 @@
 namespace FluxMailApi\Channel\SendMail\Command;
 
 use DateTime;
-use FluxMailApi\Adapter\Api\AttachmentDto;
+use FluxMailApi\Adapter\Api\AttachmentDataEncoding;
 use FluxMailApi\Adapter\Api\MailDto;
+use FluxMailApi\Adapter\Config\EncryptionType;
 use FluxMailApi\Adapter\Config\SmtpConfigDto;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SendMailCommand
 {
 
-    private SmtpConfigDto $smtp_config;
+    private readonly SmtpConfigDto $smtp_config;
 
 
     public static function new(SmtpConfigDto $smtp_config) : static
@@ -34,18 +35,18 @@ class SendMailCommand
             $sender->Host = $this->smtp_config->getHost();
             $sender->Port = $this->smtp_config->getPort();
 
-            if ($this->smtp_config->getEncryptionType() === SmtpConfigDto::ENCRYPTION_TYPE_TLS_AUTO) {
-                $sender->SMTPSecure = SmtpConfigDto::ENCRYPTION_TYPE_SSL;
+            if ($this->smtp_config->getEncryptionType() === EncryptionType::TLS_AUTO) {
+                $sender->SMTPSecure = EncryptionType::SSL;
                 $sender->SMTPAutoTLS = true;
             } else {
-                $sender->SMTPSecure = $this->smtp_config->getEncryptionType();
+                $sender->SMTPSecure = $this->smtp_config->getEncryptionType()?->value;
                 $sender->SMTPAutoTLS = false;
             }
 
             $sender->SMTPAuth = ($this->smtp_config->getAuthType() !== null || $this->smtp_config->getUserName() !== null || $this->smtp_config->getPassword() !== null);
             $sender->Username = $this->smtp_config->getUserName();
             $sender->Password = $this->smtp_config->getPassword();
-            $sender->AuthType = $this->smtp_config->getAuthType();
+            $sender->AuthType = $this->smtp_config->getAuthType()?->value;
 
             $sender->Subject = $mail->getSubject();
 
@@ -60,11 +61,11 @@ class SendMailCommand
             foreach ($mail->getAttachments() as $attachment) {
                 $data = $attachment->getData();
                 switch ($attachment->getDataEncoding()) {
-                    case AttachmentDto::DATA_ENCODING_BASE64:
+                    case AttachmentDataEncoding::BASE64:
                         $data = base64_decode($data);
                         break;
 
-                    case AttachmentDto::DATA_ENCODING_PLAIN:
+                    case AttachmentDataEncoding::PLAIN:
                     default:
                         break;
                 }

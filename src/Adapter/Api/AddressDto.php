@@ -7,8 +7,8 @@ use JsonSerializable;
 class AddressDto implements JsonSerializable
 {
 
-    private string $email;
-    private ?string $name;
+    private readonly string $email;
+    private readonly ?string $name;
 
 
     public static function new(string $email, ?string $name = null) : static
