@@ -4,6 +4,7 @@ namespace FluxMailApi\Adapter\Route;
 
 use FluxMailApi\Adapter\Api\AddressDto;
 use FluxMailApi\Adapter\Api\Api;
+use FluxMailApi\Adapter\Api\AttachmentDataEncoding;
 use FluxMailApi\Adapter\Api\AttachmentDto;
 use FluxMailApi\Adapter\Api\MailDto;
 use FluxRestApi\Body\JsonBodyDto;
@@ -11,14 +12,15 @@ use FluxRestApi\Body\TextBodyDto;
 use FluxRestApi\Request\RequestDto;
 use FluxRestApi\Response\ResponseDto;
 use FluxRestApi\Route\Route;
-use FluxRestBaseApi\Body\BodyType;
+use FluxRestBaseApi\Body\DefaultBodyType;
+use FluxRestBaseApi\Method\DefaultMethod;
 use FluxRestBaseApi\Method\Method;
-use FluxRestBaseApi\Status\Status;
+use FluxRestBaseApi\Status\DefaultStatus;
 
 class SendRoute implements Route
 {
 
-    private Api $api;
+    private readonly Api $api;
 
 
     public static function new(Api $api) : static
@@ -34,7 +36,7 @@ class SendRoute implements Route
     public function getDocuRequestBodyTypes() : ?array
     {
         return [
-            BodyType::JSON
+            DefaultBodyType::JSON
         ];
     }
 
@@ -45,9 +47,9 @@ class SendRoute implements Route
     }
 
 
-    public function getMethod() : string
+    public function getMethod() : Method
     {
-        return Method::POST;
+        return DefaultMethod::POST;
     }
 
 
@@ -64,7 +66,7 @@ class SendRoute implements Route
                 TextBodyDto::new(
                     "No json body"
                 ),
-                Status::_400
+                DefaultStatus::_400
             );
         }
 
@@ -79,7 +81,7 @@ class SendRoute implements Route
                 array_map(fn(object $attachment) : AttachmentDto => AttachmentDto::new(
                     $attachment->name,
                     $attachment->data,
-                    $attachment->data_encoding ?? null,
+                    ($data_encoding = $attachment->data_encoding ?? null) !== null ? AttachmentDataEncoding::from($data_encoding) : null,
                     $attachment->data_type ?? null
                 ), $request->getParsedBody()->getData()->attachments ?? []),
                 array_map(fn(object $address) : AddressDto => AddressDto::new(

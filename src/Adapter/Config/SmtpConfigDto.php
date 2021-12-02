@@ -7,30 +7,23 @@ use FluxMailApi\Adapter\Api\AddressDto;
 class SmtpConfigDto
 {
 
-    const AUTH_TYPE_CRAM_MD5 = "CRAM-MD5";
-    const AUTH_TYPE_LOGIN = "LOGIN";
-    const AUTH_TYPE_PLAIN = "PLAIN";
-    const AUTH_TYPE_XOAUTH2 = "XOAUTH2";
-    const ENCRYPTION_TYPE_SSL = "ssl";
-    const ENCRYPTION_TYPE_TLS = "tls";
-    const ENCRYPTION_TYPE_TLS_AUTO = "tls-auto";
-    private ?string $auth_type;
-    private AddressDto $default_from;
-    private ?string $encryption_type;
-    private string $host;
-    private ?string $password;
-    private int $port;
-    private ?string $user_name;
+    private readonly ?SmtpConfigAuthType $auth_type;
+    private readonly AddressDto $default_from;
+    private readonly ?EncryptionType $encryption_type;
+    private readonly string $host;
+    private readonly ?string $password;
+    private readonly int $port;
+    private readonly ?string $user_name;
 
 
     public static function new(
         string $host,
         int $port,
         AddressDto $default_from,
-        ?string $encryption_type = null,
+        ?EncryptionType $encryption_type = null,
         ?string $user_name = null,
         ?string $password = null,
-        ?string $auth_type = null
+        ?SmtpConfigAuthType $auth_type = null
     ) : static {
         $dto = new static();
 
@@ -46,7 +39,7 @@ class SmtpConfigDto
     }
 
 
-    public function getAuthType() : ?string
+    public function getAuthType() : ?SmtpConfigAuthType
     {
         return $this->auth_type;
     }
@@ -58,7 +51,7 @@ class SmtpConfigDto
     }
 
 
-    public function getEncryptionType() : ?string
+    public function getEncryptionType() : ?EncryptionType
     {
         return $this->encryption_type;
     }

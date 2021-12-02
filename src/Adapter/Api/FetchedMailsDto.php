@@ -5,7 +5,7 @@ namespace FluxMailApi\Adapter\Api;
 class FetchedMailsDto
 {
 
-    private array $mails;
+    private readonly array $mails;
 
 
     public static function new(array $mails) : static

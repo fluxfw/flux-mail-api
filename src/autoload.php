@@ -10,19 +10,21 @@ use FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
 use FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
 
 PhpVersionChecker::new(
-    ">=8.0",
-    __NAMESPACE__
+    ">=8.1"
 )
-    ->check();
+    ->checkAndDie(
+        __NAMESPACE__
+    );
 PhpExtChecker::new(
     [
         "imap",
         "json",
         "swoole"
-    ],
-    __NAMESPACE__
+    ]
 )
-    ->check();
+    ->checkAndDie(
+        __NAMESPACE__
+    );
 
 Psr4Autoload::new(
     [
@@ -32,10 +34,10 @@ Psr4Autoload::new(
     ->autoload();
 
 ComposerAutoload::new(
-    __DIR__ . "/../libs/PHPMailer"
+    __DIR__ . "/../libs/php-imap"
 )
     ->autoload();
 ComposerAutoload::new(
-    __DIR__ . "/../libs/php-imap"
+    __DIR__ . "/../libs/PHPMailer"
 )
     ->autoload();

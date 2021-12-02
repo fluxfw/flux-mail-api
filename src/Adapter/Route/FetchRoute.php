@@ -7,12 +7,13 @@ use FluxRestApi\Body\JsonBodyDto;
 use FluxRestApi\Request\RequestDto;
 use FluxRestApi\Response\ResponseDto;
 use FluxRestApi\Route\Route;
+use FluxRestBaseApi\Method\DefaultMethod;
 use FluxRestBaseApi\Method\Method;
 
 class FetchRoute implements Route
 {
 
-    private Api $api;
+    private readonly Api $api;
 
 
     public static function new(Api $api) : static
@@ -37,9 +38,9 @@ class FetchRoute implements Route
     }
 
 
-    public function getMethod() : string
+    public function getMethod() : Method
     {
-        return Method::GET;
+        return DefaultMethod::GET;
     }
 
 

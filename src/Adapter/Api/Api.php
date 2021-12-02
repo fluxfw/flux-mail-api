@@ -10,7 +10,7 @@ use FluxMailApi\Channel\SendMail\Port\SendMailService;
 class Api
 {
 
-    private Config $config;
+    private readonly Config $config;
 
 
     public static function new(?Config $config = null) : static

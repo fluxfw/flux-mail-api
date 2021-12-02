@@ -4,16 +4,18 @@ namespace FluxMailApi\Channel\FetchMails\Command;
 
 use DateTime;
 use FluxMailApi\Adapter\Api\AddressDto;
+use FluxMailApi\Adapter\Api\AttachmentDataEncoding;
 use FluxMailApi\Adapter\Api\AttachmentDto;
 use FluxMailApi\Adapter\Api\FetchedMailsDto;
 use FluxMailApi\Adapter\Api\MailDto;
+use FluxMailApi\Adapter\Config\EncryptionType;
 use FluxMailApi\Adapter\Config\MailConfigDto;
 use PhpImap\Mailbox;
 
 class FetchMailsCommand
 {
 
-    private MailConfigDto $mail_config;
+    private readonly MailConfigDto $mail_config;
 
 
     public static function new(MailConfigDto $mail_config) : static
@@ -35,14 +37,14 @@ class FetchMailsCommand
             $connection_string .= $this->mail_config->getHost();
             $connection_string .= ":" . $this->mail_config->getPort();
 
-            $connection_string .= "/" . $this->mail_config->getType();
+            $connection_string .= "/" . $this->mail_config->getType()->value;
 
             if ($this->mail_config->getEncryptionType() !== null) {
-                if ($this->mail_config->getEncryptionType() === MailConfigDto::ENCRYPTION_TYPE_TLS_AUTO) {
-                    $connection_string .= "/" . MailConfigDto::ENCRYPTION_TYPE_SSL;
+                if ($this->mail_config->getEncryptionType() === EncryptionType::TLS_AUTO) {
+                    $connection_string .= "/ssl";
                 } else {
-                    $connection_string .= "/" . $this->mail_config->getEncryptionType();
-                    if ($this->mail_config->getEncryptionType() !== MailConfigDto::ENCRYPTION_TYPE_TLS) {
+                    $connection_string .= "/" . $this->mail_config->getEncryptionType()->value;
+                    if ($this->mail_config->getEncryptionType() !== EncryptionType::TLS) {
                         $connection_string .= "/notls";
                     }
                 }
@@ -66,7 +68,7 @@ class FetchMailsCommand
                     array_map(fn(object $attachment) : AttachmentDto => AttachmentDto::new(
                         $attachment->name,
                         base64_encode($attachment->getContents()),
-                        AttachmentDto::DATA_ENCODING_BASE64,
+                        AttachmentDataEncoding::BASE64,
                         $attachment->mime
                     ), $mail->getAttachments()
                     ),

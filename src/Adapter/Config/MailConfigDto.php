@@ -5,25 +5,27 @@ namespace FluxMailApi\Adapter\Config;
 class MailConfigDto
 {
 
-    const BOX_INBOX = "INBOX";
-    const ENCRYPTION_TYPE_SSL = "ssl";
-    const ENCRYPTION_TYPE_TLS = "tls";
-    const ENCRYPTION_TYPE_TLS_AUTO = "tls-auto";
-    const TYPE_IMAP = "imap";
-    const TYPE_NNTP = "nntp";
-    const TYPE_POP3 = "pop3";
-    private string $box;
-    private ?string $encryption_type;
-    private string $host;
-    private bool $mark_as_read;
-    private string $password;
-    private int $port;
-    private string $type;
-    private string $user_name;
+    private const BOX_INBOX = "INBOX";
+    private readonly string $box;
+    private readonly ?EncryptionType $encryption_type;
+    private readonly string $host;
+    private readonly bool $mark_as_read;
+    private readonly string $password;
+    private readonly int $port;
+    private readonly MailConfigType $type;
+    private readonly string $user_name;
 
 
-    public static function new(string $host, int $port, string $type, string $user_name, string $password, ?string $encryption_type = null, ?string $box = null, ?bool $mark_as_read = null) : static
-    {
+    public static function new(
+        string $host,
+        int $port,
+        MailConfigType $type,
+        string $user_name,
+        string $password,
+        ?EncryptionType $encryption_type = null,
+        ?string $box = null,
+        ?bool $mark_as_read = null
+    ) : static {
         $dto = new static();
 
         $dto->host = $host;
@@ -45,7 +47,7 @@ class MailConfigDto
     }
 
 
-    public function getEncryptionType() : ?string
+    public function getEncryptionType() : ?EncryptionType
     {
         return $this->encryption_type;
     }
@@ -69,7 +71,7 @@ class MailConfigDto
     }
 
 
-    public function getType() : string
+    public function getType() : MailConfigType
     {
         return $this->type;
     }
