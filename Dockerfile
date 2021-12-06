@@ -1,10 +1,12 @@
+ARG FLUX_AUTOLOAD_API_IMAGE=docker-registry.fluxpublisher.ch/flux-autoload/api:latest
+ARG FLUX_REST_API_IMAGE=docker-registry.fluxpublisher.ch/flux-rest/api:latest
 ARG PHP_CLI_IMAGE=php:cli-alpine
 ARG PHPIMAP_SOURCE_URL=https://github.com/barbushin/php-imap/archive/master.tar.gz
 ARG PHPMAILER_SOURCE_URL=https://github.com/PHPMailer/PHPMailer/archive/master.tar.gz
-ARG REST_API_IMAGE=docker-registry.fluxpublisher.ch/flux-rest/api:latest
 ARG SWOOLE_SOURCE_URL=https://github.com/swoole/swoole-src/archive/master.tar.gz
 
-FROM $REST_API_IMAGE AS rest_api
+FROM $FLUX_AUTOLOAD_API_IMAGE AS flux_autoload_api
+FROM $FLUX_REST_API_IMAGE AS flux_rest_api
 
 FROM $PHP_CLI_IMAGE
 ARG PHPIMAP_SOURCE_URL
@@ -23,7 +25,8 @@ RUN apk add --no-cache imap-dev libstdc++ && \
     docker-php-source delete && \
     apk del .build-deps
 
-COPY --from=rest_api /flux-rest-api /flux-mail-api/libs/flux-rest-api
+COPY --from=flux_autoload_api /flux-autoload-api /flux-mail-api/libs/flux-autoload-api
+COPY --from=flux_rest_api /flux-rest-api /flux-mail-api/libs/flux-rest-api
 RUN (mkdir -p /flux-mail-api/libs/php-imap && cd /flux-mail-api/libs/php-imap && wget -O - $PHPIMAP_SOURCE_URL | tar -xz --strip-components=1 && sed -i "s/\$reverse = (int) \$reverse;/\$reverse = (bool) \$reverse;/" "src/PhpImap/Imap.php" && sed -i "s/\\\\is_resource(\$imap_stream)/(\$imap_stream instanceof \\\\IMAP\\\\Connection)/" "src/PhpImap/Imap.php" && sed -i "s/\\\\is_resource(\$maybe)/(\$maybe instanceof \\\\IMAP\\\\Connection)/" "src/PhpImap/Imap.php")
 RUN (mkdir -p /flux-mail-api/libs/PHPMailer && cd /flux-mail-api/libs/PHPMailer && wget -O - $PHPMAILER_SOURCE_URL | tar -xz --strip-components=1)
 COPY . /flux-mail-api

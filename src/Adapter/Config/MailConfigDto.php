@@ -6,14 +6,14 @@ class MailConfigDto
 {
 
     private const BOX_INBOX = "INBOX";
-    private readonly string $box;
-    private readonly ?EncryptionType $encryption_type;
-    private readonly string $host;
-    private readonly bool $mark_as_read;
-    private readonly string $password;
-    private readonly int $port;
-    private readonly MailConfigType $type;
-    private readonly string $user_name;
+    public readonly string $box;
+    public readonly ?EncryptionType $encryption_type;
+    public readonly string $host;
+    public readonly bool $mark_as_read;
+    public readonly string $password;
+    public readonly int $port;
+    public readonly MailConfigType $type;
+    public readonly string $user_name;
 
 
     public static function new(
@@ -38,53 +38,5 @@ class MailConfigDto
         $dto->mark_as_read = $mark_as_read ?? true;
 
         return $dto;
-    }
-
-
-    public function getBox() : string
-    {
-        return $this->box;
-    }
-
-
-    public function getEncryptionType() : ?EncryptionType
-    {
-        return $this->encryption_type;
-    }
-
-
-    public function getHost() : string
-    {
-        return $this->host;
-    }
-
-
-    public function getPassword() : string
-    {
-        return $this->password;
-    }
-
-
-    public function getPort() : int
-    {
-        return $this->port;
-    }
-
-
-    public function getType() : MailConfigType
-    {
-        return $this->type;
-    }
-
-
-    public function getUserName() : string
-    {
-        return $this->user_name;
-    }
-
-
-    public function isMarkAsRead() : bool
-    {
-        return $this->mark_as_read;
     }
 }

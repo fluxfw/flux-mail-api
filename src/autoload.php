@@ -2,6 +2,7 @@
 
 namespace FluxMailApi;
 
+require_once __DIR__ . "/../libs/flux-autoload-api/autoload.php";
 require_once __DIR__ . "/../libs/flux-rest-api/autoload.php";
 
 use FluxAutoloadApi\Adapter\Autoload\ComposerAutoload;

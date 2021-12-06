@@ -2,22 +2,35 @@
 
 namespace FluxMailApi\Adapter\Api;
 
-use JsonSerializable;
-
-class MailDto implements JsonSerializable
+class MailDto
 {
 
-    private readonly array $attachments;
-    private readonly array $bcc;
-    private readonly string $body_html;
-    private readonly string $body_text;
-    private readonly array $cc;
-    private readonly ?AddressDto $from;
-    private readonly ?string $message_id;
-    private readonly array $reply_to;
-    private readonly string $subject;
-    private readonly int $time;
-    private readonly array $to;
+    /**
+     * @var AttachmentDto[]
+     */
+    public readonly array $attachments;
+    /**
+     * @var AddressDto[]
+     */
+    public readonly array $bcc;
+    public readonly string $body_html;
+    public readonly string $body_text;
+    /**
+     * @var AddressDto[]
+     */
+    public readonly array $cc;
+    public readonly ?AddressDto $from;
+    public readonly ?string $message_id;
+    /**
+     * @var AddressDto[]
+     */
+    public readonly array $reply_to;
+    public readonly string $subject;
+    public readonly int $time;
+    /**
+     * @var AddressDto[]
+     */
+    public readonly array $to;
 
 
     public static function new(
@@ -48,77 +61,5 @@ class MailDto implements JsonSerializable
         $dto->body_text = $body_text ?? "";
 
         return $dto;
-    }
-
-
-    public function getAttachments() : array
-    {
-        return $this->attachments;
-    }
-
-
-    public function getBcc() : array
-    {
-        return $this->bcc;
-    }
-
-
-    public function getBodyHtml() : string
-    {
-        return $this->body_html;
-    }
-
-
-    public function getBodyText() : string
-    {
-        return $this->body_text;
-    }
-
-
-    public function getCc() : array
-    {
-        return $this->cc;
-    }
-
-
-    public function getFrom() : ?AddressDto
-    {
-        return $this->from;
-    }
-
-
-    public function getMessageId() : ?string
-    {
-        return $this->message_id;
-    }
-
-
-    public function getReplyTo() : array
-    {
-        return $this->reply_to;
-    }
-
-
-    public function getSubject() : string
-    {
-        return $this->subject;
-    }
-
-
-    public function getTime() : int
-    {
-        return $this->time;
-    }
-
-
-    public function getTo() : array
-    {
-        return $this->to;
-    }
-
-
-    public function jsonSerialize() : array
-    {
-        return get_object_vars($this);
     }
 }

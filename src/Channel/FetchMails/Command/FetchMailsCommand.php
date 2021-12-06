@@ -34,17 +34,17 @@ class FetchMailsCommand
         try {
             $connection_string = "{";
 
-            $connection_string .= $this->mail_config->getHost();
-            $connection_string .= ":" . $this->mail_config->getPort();
+            $connection_string .= $this->mail_config->host;
+            $connection_string .= ":" . $this->mail_config->port;
 
-            $connection_string .= "/" . $this->mail_config->getType()->value;
+            $connection_string .= "/" . $this->mail_config->type->value;
 
-            if ($this->mail_config->getEncryptionType() !== null) {
-                if ($this->mail_config->getEncryptionType() === EncryptionType::TLS_AUTO) {
+            if ($this->mail_config->encryption_type !== null) {
+                if ($this->mail_config->encryption_type === EncryptionType::TLS_AUTO) {
                     $connection_string .= "/ssl";
                 } else {
-                    $connection_string .= "/" . $this->mail_config->getEncryptionType()->value;
-                    if ($this->mail_config->getEncryptionType() !== EncryptionType::TLS) {
+                    $connection_string .= "/" . $this->mail_config->encryption_type->value;
+                    if ($this->mail_config->encryption_type !== EncryptionType::TLS) {
                         $connection_string .= "/notls";
                     }
                 }
@@ -52,14 +52,14 @@ class FetchMailsCommand
 
             $connection_string .= "}";
 
-            $connection_string .= $this->mail_config->getBox();
+            $connection_string .= $this->mail_config->box;
 
-            $fetcher = new Mailbox($connection_string, $this->mail_config->getUserName(), $this->mail_config->getPassword());
+            $fetcher = new Mailbox($connection_string, $this->mail_config->user_name, $this->mail_config->password);
 
             $mails = [];
 
             foreach ($fetcher->sortMails(SORTARRIVAL, false) as $number) {
-                $mail = $fetcher->getMail($number, $this->mail_config->isMarkAsRead());
+                $mail = $fetcher->getMail($number, $this->mail_config->mark_as_read);
 
                 $mails[] = MailDto::new(
                     $mail->subject ?? "",
