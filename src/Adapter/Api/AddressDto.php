@@ -2,9 +2,7 @@
 
 namespace FluxMailApi\Adapter\Api;
 
-use JsonSerializable;
-
-class AddressDto implements JsonSerializable
+class AddressDto
 {
 
     public readonly string $email;
@@ -19,11 +17,5 @@ class AddressDto implements JsonSerializable
         $dto->name = $name;
 
         return $dto;
-    }
-
-
-    public function jsonSerialize() : array
-    {
-        return get_object_vars($this);
     }
 }

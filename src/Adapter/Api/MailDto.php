@@ -2,9 +2,7 @@
 
 namespace FluxMailApi\Adapter\Api;
 
-use JsonSerializable;
-
-class MailDto implements JsonSerializable
+class MailDto
 {
 
     /**
@@ -63,11 +61,5 @@ class MailDto implements JsonSerializable
         $dto->body_text = $body_text ?? "";
 
         return $dto;
-    }
-
-
-    public function jsonSerialize() : array
-    {
-        return get_object_vars($this);
     }
 }

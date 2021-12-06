@@ -2,9 +2,7 @@
 
 namespace FluxMailApi\Adapter\Api;
 
-use JsonSerializable;
-
-class AttachmentDto implements JsonSerializable
+class AttachmentDto
 {
 
     public readonly string $data;
@@ -23,11 +21,5 @@ class AttachmentDto implements JsonSerializable
         $dto->data_type = $data_type;
 
         return $dto;
-    }
-
-
-    public function jsonSerialize() : array
-    {
-        return get_object_vars($this);
     }
 }

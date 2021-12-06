@@ -18,7 +18,6 @@ PhpVersionChecker::new(
 PhpExtChecker::new(
     [
         "imap",
-        "json",
         "swoole"
     ]
 )
