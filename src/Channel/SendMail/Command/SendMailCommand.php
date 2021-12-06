@@ -32,35 +32,35 @@ class SendMailCommand
             $sender = new PHPMailer(true);
 
             $sender->isSMTP();
-            $sender->Host = $this->smtp_config->getHost();
-            $sender->Port = $this->smtp_config->getPort();
+            $sender->Host = $this->smtp_config->host;
+            $sender->Port = $this->smtp_config->port;
 
-            if ($this->smtp_config->getEncryptionType() === EncryptionType::TLS_AUTO) {
+            if ($this->smtp_config->encryption_type === EncryptionType::TLS_AUTO) {
                 $sender->SMTPSecure = EncryptionType::SSL;
                 $sender->SMTPAutoTLS = true;
             } else {
-                $sender->SMTPSecure = $this->smtp_config->getEncryptionType()?->value;
+                $sender->SMTPSecure = $this->smtp_config->encryption_type?->value;
                 $sender->SMTPAutoTLS = false;
             }
 
-            $sender->SMTPAuth = ($this->smtp_config->getAuthType() !== null || $this->smtp_config->getUserName() !== null || $this->smtp_config->getPassword() !== null);
-            $sender->Username = $this->smtp_config->getUserName();
-            $sender->Password = $this->smtp_config->getPassword();
-            $sender->AuthType = $this->smtp_config->getAuthType()?->value;
+            $sender->SMTPAuth = ($this->smtp_config->auth_type !== null || $this->smtp_config->user_name !== null || $this->smtp_config->password !== null);
+            $sender->Username = $this->smtp_config->user_name;
+            $sender->Password = $this->smtp_config->password;
+            $sender->AuthType = $this->smtp_config->auth_type?->value;
 
-            $sender->Subject = $mail->getSubject();
+            $sender->Subject = $mail->subject;
 
             $sender->isHTML();
-            $sender->Body = $mail->getBodyHtml();
-            $sender->AltBody = $mail->getBodyText();
+            $sender->Body = $mail->body_html;
+            $sender->AltBody = $mail->body_text;
 
-            foreach ($mail->getTo() as $to) {
-                $sender->addAddress($to->getEmail(), $to->getName());
+            foreach ($mail->to as $to) {
+                $sender->addAddress($to->email, $to->name);
             }
 
-            foreach ($mail->getAttachments() as $attachment) {
-                $data = $attachment->getData();
-                switch ($attachment->getDataEncoding()) {
+            foreach ($mail->attachments as $attachment) {
+                $data = $attachment->data;
+                switch ($attachment->data_encoding) {
                     case AttachmentDataEncoding::BASE64:
                         $data = base64_decode($data);
                         break;
@@ -69,27 +69,27 @@ class SendMailCommand
                     default:
                         break;
                 }
-                $sender->addStringAttachment($data, $attachment->getName(), PHPMailer::ENCODING_BASE64, $attachment->getDataType());
+                $sender->addStringAttachment($data, $attachment->name, PHPMailer::ENCODING_BASE64, $attachment->data_type);
             }
 
-            foreach ($mail->getReplyTo() as $reply_to) {
-                $sender->addReplyTo($reply_to->getEmail(), $reply_to->getName());
+            foreach ($mail->reply_to as $reply_to) {
+                $sender->addReplyTo($reply_to->email, $reply_to->name);
             }
 
-            foreach ($mail->getCc() as $cc) {
-                $sender->addCC($cc->getEmail(), $cc->getName());
+            foreach ($mail->cc as $cc) {
+                $sender->addCC($cc->email, $cc->name);
             }
 
-            foreach ($mail->getBcc() as $bcc) {
-                $sender->addBCC($bcc->getEmail(), $bcc->getName());
+            foreach ($mail->bcc as $bcc) {
+                $sender->addBCC($bcc->email, $bcc->name);
             }
 
-            $from = $mail->getFrom() ?? $this->smtp_config->getDefaultFrom();
-            $sender->setFrom($from->getEmail(), $from->getName());
+            $from = $mail->from ?? $this->smtp_config->default_from;
+            $sender->setFrom($from->email, $from->name);
 
-            $sender->MessageDate = (new DateTime("@" . $mail->getTime()))->format("D, j M Y H:i:s O");
+            $sender->MessageDate = (new DateTime("@" . $mail->time))->format("D, j M Y H:i:s O");
 
-            $sender->MessageID = $mail->getMessageId();
+            $sender->MessageID = $mail->message_id;
 
             $sender->send();
         } finally {

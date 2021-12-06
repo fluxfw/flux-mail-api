@@ -7,8 +7,8 @@ use JsonSerializable;
 class AddressDto implements JsonSerializable
 {
 
-    private readonly string $email;
-    private readonly ?string $name;
+    public readonly string $email;
+    public readonly ?string $name;
 
 
     public static function new(string $email, ?string $name = null) : static
@@ -19,18 +19,6 @@ class AddressDto implements JsonSerializable
         $dto->name = $name;
 
         return $dto;
-    }
-
-
-    public function getEmail() : string
-    {
-        return $this->email;
-    }
-
-
-    public function getName() : ?string
-    {
-        return $this->name;
     }
 
 

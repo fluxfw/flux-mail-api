@@ -7,13 +7,13 @@ use FluxMailApi\Adapter\Api\AddressDto;
 class SmtpConfigDto
 {
 
-    private readonly ?SmtpConfigAuthType $auth_type;
-    private readonly AddressDto $default_from;
-    private readonly ?EncryptionType $encryption_type;
-    private readonly string $host;
-    private readonly ?string $password;
-    private readonly int $port;
-    private readonly ?string $user_name;
+    public readonly ?SmtpConfigAuthType $auth_type;
+    public readonly AddressDto $default_from;
+    public readonly ?EncryptionType $encryption_type;
+    public readonly string $host;
+    public readonly ?string $password;
+    public readonly int $port;
+    public readonly ?string $user_name;
 
 
     public static function new(
@@ -36,47 +36,5 @@ class SmtpConfigDto
         $dto->auth_type = $auth_type;
 
         return $dto;
-    }
-
-
-    public function getAuthType() : ?SmtpConfigAuthType
-    {
-        return $this->auth_type;
-    }
-
-
-    public function getDefaultFrom() : AddressDto
-    {
-        return $this->default_from;
-    }
-
-
-    public function getEncryptionType() : ?EncryptionType
-    {
-        return $this->encryption_type;
-    }
-
-
-    public function getHost() : string
-    {
-        return $this->host;
-    }
-
-
-    public function getPassword() : ?string
-    {
-        return $this->password;
-    }
-
-
-    public function getPort() : int
-    {
-        return $this->port;
-    }
-
-
-    public function getUserName() : ?string
-    {
-        return $this->user_name;
     }
 }

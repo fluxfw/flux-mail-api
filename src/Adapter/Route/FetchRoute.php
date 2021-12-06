@@ -55,7 +55,7 @@ class FetchRoute implements Route
         return ResponseDto::new(
             JsonBodyDto::new(
                 $this->api->fetch()
-                    ->getMails()
+                    ->mails
             )
         );
     }
