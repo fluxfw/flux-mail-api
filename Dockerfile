@@ -1,7 +1,7 @@
 ARG FLUX_AUTOLOAD_API_IMAGE=docker-registry.fluxpublisher.ch/flux-autoload/api:latest
 ARG FLUX_REST_API_IMAGE=docker-registry.fluxpublisher.ch/flux-rest/api:latest
 ARG PHP_CLI_IMAGE=php:cli-alpine
-ARG PHPIMAP_SOURCE_URL=https://github.com/barbushin/php-imap/archive/develop.tar.gz
+ARG PHPIMAP_SOURCE_URL=https://github.com/barbushin/php-imap/archive/master.tar.gz
 ARG PHPMAILER_SOURCE_URL=https://github.com/PHPMailer/PHPMailer/archive/master.tar.gz
 ARG SWOOLE_SOURCE_URL=https://github.com/swoole/swoole-src/archive/master.tar.gz
 
