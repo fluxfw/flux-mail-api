@@ -1,12 +1,12 @@
-version: "3"
+version: "3.6"
 services:
   mail-api:
     environment:
       - FLUX_MAIL_API_MAIL_HOST=...
       - FLUX_MAIL_API_MAIL_PORT=993
       - FLUX_MAIL_API_MAIL_TYPE=imap
-      - FLUX_MAIL_API_MAIL_USER_NAME=...
-      - FLUX_MAIL_API_MAIL_PASSWORD=...
+      - FLUX_MAIL_API_MAIL_USER_NAME_FILE=/run/secrets/imap_user
+      - FLUX_MAIL_API_MAIL_PASSWORD_FILE=/run/secrets/imap_password
       - FLUX_MAIL_API_MAIL_ENCRYPTION_TYPE=tls-auto
       - FLUX_MAIL_API_MAIL_MARK_AS_READ=false
       - FLUX_MAIL_API_SMTP_HOST=smtp
@@ -16,6 +16,9 @@ services:
     image: docker-registry.fluxpublisher.ch/flux-mail/api:latest
     ports:
       - [%host_ip%:]9501:9501
+    secrets:
+      - imap_user
+      - imap_password
   smtp:
     image: mailhog/mailhog:latest
     ports:
@@ -24,3 +27,8 @@ services:
     environment:
       [- FLUX_MAIL_API_HOST=mail-api]
       [- FLUX_MAIL_API_PORT=9501]
+secrets:
+  imap_user:
+    file: ./data/imap_user
+  imap_password:
+    file: ./data/imap_password
