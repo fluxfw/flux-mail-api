@@ -33,4 +33,6 @@ COPY . /flux-mail-api
 
 ENTRYPOINT ["/flux-mail-api/bin/entrypoint.php"]
 
+USER www-data:www-data
+
 EXPOSE 9501
