@@ -29,6 +29,6 @@ services:
       [- FLUX_MAIL_API_PORT=9501]
 secrets:
   imap_user:
-    file: ./data/imap_user
+    file: ./data/secrets/imap_user
   imap_password:
-    file: ./data/imap_password
+    file: ./data/secrets/imap_password
