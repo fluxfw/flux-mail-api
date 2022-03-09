@@ -12,16 +12,19 @@ use PHPMailer\PHPMailer\PHPMailer;
 class SendMailCommand
 {
 
-    private readonly SmtpConfigDto $smtp_config;
+    private function __construct(
+        private readonly SmtpConfigDto $smtp_config
+    ) {
+
+    }
 
 
-    public static function new(SmtpConfigDto $smtp_config) : static
-    {
-        $command = new static();
-
-        $command->smtp_config = $smtp_config;
-
-        return $command;
+    public static function new(
+        SmtpConfigDto $smtp_config
+    ) : static {
+        return new static(
+            $smtp_config
+        );
     }
 
 

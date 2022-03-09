@@ -7,13 +7,17 @@ use FluxMailApi\Adapter\Api\AddressDto;
 class SmtpConfigDto
 {
 
-    public readonly ?SmtpConfigAuthType $auth_type;
-    public readonly AddressDto $default_from;
-    public readonly ?EncryptionType $encryption_type;
-    public readonly string $host;
-    public readonly ?string $password;
-    public readonly int $port;
-    public readonly ?string $user_name;
+    private function __construct(
+        public readonly string $host,
+        public readonly int $port,
+        public readonly AddressDto $default_from,
+        public readonly ?EncryptionType $encryption_type,
+        public readonly ?string $user_name,
+        public readonly ?string $password,
+        public readonly ?SmtpConfigAuthType $auth_type
+    ) {
+
+    }
 
 
     public static function new(
@@ -25,16 +29,33 @@ class SmtpConfigDto
         ?string $password = null,
         ?SmtpConfigAuthType $auth_type = null
     ) : static {
-        $dto = new static();
+        return new static(
+            $host,
+            $port,
+            $default_from,
+            $encryption_type,
+            $user_name,
+            $password,
+            $auth_type
+        );
+    }
 
-        $dto->host = $host;
-        $dto->port = $port;
-        $dto->default_from = $default_from;
-        $dto->encryption_type = $encryption_type;
-        $dto->user_name = $user_name;
-        $dto->password = $password;
-        $dto->auth_type = $auth_type;
 
-        return $dto;
+    public static function newFromEnv() : static
+    {
+        return static::new(
+            $_ENV["FLUX_MAIL_API_SMTP_HOST"],
+            $_ENV["FLUX_MAIL_API_SMTP_PORT"],
+            AddressDto::new(
+                $_ENV["FLUX_MAIL_API_SMTP_FROM"],
+                $_ENV["FLUX_MAIL_API_SMTP_FROM_NAME"] ?? null
+            ),
+            ($encryption_type = $_ENV["FLUX_MAIL_API_SMTP_ENCRYPTION_TYPE"] ?? null) ? EncryptionType::from($encryption_type) : null,
+            ($_ENV["FLUX_MAIL_API_SMTP_USER_NAME"] ?? null) ??
+            (($user_name_file = $_ENV["FLUX_MAIL_API_SMTP_USER_NAME_FILE"] ?? null) !== null && file_exists($user_name_file) ? (file_get_contents($user_name_file) ?: "") : null),
+            ($_ENV["FLUX_MAIL_API_SMTP_PASSWORD"] ?? null) ??
+            (($password_file = $_ENV["FLUX_MAIL_API_SMTP_PASSWORD_FILE"] ?? null) !== null && file_exists($password_file) ? (file_get_contents($password_file) ?: "") : null),
+            ($auth_type = $_ENV["FLUX_MAIL_API_SMTP_AUTH_TYPE"] ?? null) !== null ? SmtpConfigAuthType::from($auth_type) : null
+        );
     }
 }

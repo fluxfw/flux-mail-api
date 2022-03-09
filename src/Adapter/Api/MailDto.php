@@ -6,31 +6,27 @@ class MailDto
 {
 
     /**
-     * @var AttachmentDto[]
+     * @param AddressDto[]    $to
+     * @param AttachmentDto[] $attachments
+     * @param AddressDto[]    $reply_to
+     * @param AddressDto[]    $cc
+     * @param AddressDto[]    $bcc
      */
-    public readonly array $attachments;
-    /**
-     * @var AddressDto[]
-     */
-    public readonly array $bcc;
-    public readonly string $body_html;
-    public readonly string $body_text;
-    /**
-     * @var AddressDto[]
-     */
-    public readonly array $cc;
-    public readonly ?AddressDto $from;
-    public readonly ?string $message_id;
-    /**
-     * @var AddressDto[]
-     */
-    public readonly array $reply_to;
-    public readonly string $subject;
-    public readonly int $time;
-    /**
-     * @var AddressDto[]
-     */
-    public readonly array $to;
+    private function __construct(
+        public readonly string $subject,
+        public readonly string $body_html,
+        public readonly array $to,
+        public readonly array $attachments,
+        public readonly array $reply_to,
+        public readonly array $cc,
+        public readonly array $bcc,
+        public readonly ?AddressDto $from,
+        public readonly int $time,
+        public readonly ?string $message_id,
+        public readonly string $body_text
+    ) {
+
+    }
 
 
     public static function new(
@@ -46,20 +42,18 @@ class MailDto
         ?string $message_id = null,
         ?string $body_text = null
     ) : static {
-        $dto = new static();
-
-        $dto->subject = $subject;
-        $dto->body_html = $body_html;
-        $dto->to = $to;
-        $dto->attachments = $attachments ?? [];
-        $dto->reply_to = $reply_to ?? [];
-        $dto->cc = $cc ?? [];
-        $dto->bcc = $bcc ?? [];
-        $dto->from = $from;
-        $dto->time = $time ?? time();
-        $dto->message_id = $message_id;
-        $dto->body_text = $body_text ?? "";
-
-        return $dto;
+        return new static(
+            $subject,
+            $body_html,
+            $to,
+            $attachments ?? [],
+            $reply_to ?? [],
+            $cc ?? [],
+            $bcc ?? [],
+            $from,
+            $time ?? time(),
+            $message_id,
+            $body_text ?? ""
+        );
     }
 }

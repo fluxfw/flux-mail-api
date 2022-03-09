@@ -1,13 +1,23 @@
 # flux-mail-api
 
+Mail Api for fetch or send mails
+
+## Installation
+
+```dockerfile
+COPY --from=docker-registry.fluxpublisher.ch/flux-mail/api:latest /flux-mail-api /%path%/libs/flux-mail-api
+```
+
+## Usage
+
+```php
+require_once __DIR__ . "/%path%/libs/flux-mail-api/autoload.php";
+```
+
 ## Environment variables
 
 | Variable | Description | Default value |
 | -------- | ----------- | ------------- |
-| FLUX_MAIL_API_SERVER_HTTPS_CERT | Path to HTTPS certificate file<br>Set this will enable listen on HTTPS<br>Should be on a volume | - |
-| FLUX_MAIL_API_SERVER_HTTPS_KEY | Path to HTTPS key file<br>Should be on a volume | - |
-| FLUX_MAIL_API_SERVER_LISTEN | Listen IP | 0.0.0.0 |
-| FLUX_MAIL_API_SERVER_PORT | Listen port | 9501 |
 | **FLUX_MAIL_API_MAIL_HOST** | Mail server host name | - |
 | **FLUX_MAIL_API_MAIL_PORT** | Mail server port | - |
 | **FLUX_MAIL_API_MAIL_TYPE** | Mail server type<br>imap, pop3 or nntp | - |
@@ -27,6 +37,6 @@
 
 Minimal variables required to set are **bold**
 
-## Examples
+## Example
 
-[examples](examples)
+Look at [flux-mail-rest-api](https://github.com/fluxapps/flux-mail-rest-api)

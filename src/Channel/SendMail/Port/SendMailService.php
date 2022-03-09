@@ -9,16 +9,19 @@ use FluxMailApi\Channel\SendMail\Command\SendMailCommand;
 class SendMailService
 {
 
-    private readonly SmtpConfigDto $smtp_config;
+    private function __construct(
+        private readonly SmtpConfigDto $smtp_config
+    ) {
+
+    }
 
 
-    public static function new(SmtpConfigDto $smtp_config) : static
-    {
-        $service = new static();
-
-        $service->smtp_config = $smtp_config;
-
-        return $service;
+    public static function new(
+        SmtpConfigDto $smtp_config
+    ) : static {
+        return new static(
+            $smtp_config
+        );
     }
 
 

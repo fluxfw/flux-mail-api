@@ -1,17 +1,15 @@
 {
-  "description": "Fetch or send mails",
-  "topics": [
-    "alpine",
-    "api",
-    "docker",
-    "fetch",
-    "imap",
-    "mail",
-    "php",
-    "rest",
-    "send",
-    "smtp",
-    "swoole"
-  ],
-  "homepage": "https://github.com/fluxapps/flux-mail-api"
+    "description": "Mail Api for fetch or send mails",
+    "topics": [
+        "api",
+        "fetch",
+        "imap",
+        "library",
+        "mail",
+        "mails",
+        "php",
+        "send",
+        "smtp"
+    ],
+    "homepage": "https://github.com/fluxapps/flux-mail-api"
 }
