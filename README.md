@@ -14,6 +14,10 @@ COPY --from=docker-registry.fluxpublisher.ch/flux-mail/api:latest /flux-mail-api
 require_once __DIR__ . "/%path%/libs/flux-mail-api/autoload.php";
 ```
 
+```php
+MailApi::new();
+```
+
 ## Environment variables
 
 | Variable | Description | Default value |
