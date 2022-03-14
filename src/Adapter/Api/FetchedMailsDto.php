@@ -6,17 +6,20 @@ class FetchedMailsDto
 {
 
     /**
-     * @var MailDto[]
+     * @param MailDto[] $mails
      */
-    public readonly array $mails;
+    private function __construct(
+        public readonly array $mails
+    ) {
+
+    }
 
 
-    public static function new(array $mails) : static
-    {
-        $dto = new static();
-
-        $dto->mails = $mails;
-
-        return $dto;
+    public static function new(
+        array $mails
+    ) : static {
+        return new static(
+            $mails
+        );
     }
 }

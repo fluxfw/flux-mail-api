@@ -3,12 +3,11 @@
 namespace FluxMailApi;
 
 require_once __DIR__ . "/../libs/flux-autoload-api/autoload.php";
-require_once __DIR__ . "/../libs/flux-rest-api/autoload.php";
 
-use FluxAutoloadApi\Adapter\Autoload\ComposerAutoload;
-use FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
-use FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
-use FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
+use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Autoload\ComposerAutoload;
+use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
+use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
+use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
 
 PhpVersionChecker::new(
     ">=8.1"
@@ -19,8 +18,7 @@ PhpVersionChecker::new(
 PhpExtChecker::new(
     [
         "imap",
-        "json",
-        "swoole"
+        "json"
     ]
 )
     ->checkAndDie(

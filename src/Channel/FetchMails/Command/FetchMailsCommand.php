@@ -15,16 +15,19 @@ use PhpImap\Mailbox;
 class FetchMailsCommand
 {
 
-    private readonly MailConfigDto $mail_config;
+    private function __construct(
+        private readonly MailConfigDto $mail_config
+    ) {
+
+    }
 
 
-    public static function new(MailConfigDto $mail_config) : static
-    {
-        $command = new static();
-
-        $command->mail_config = $mail_config;
-
-        return $command;
+    public static function new(
+        MailConfigDto $mail_config
+    ) : static {
+        return new static(
+            $mail_config
+        );
     }
 
 
