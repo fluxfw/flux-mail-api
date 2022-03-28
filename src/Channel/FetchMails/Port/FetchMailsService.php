@@ -2,8 +2,8 @@
 
 namespace FluxMailApi\Channel\FetchMails\Port;
 
-use FluxMailApi\Adapter\Api\FetchedMailsDto;
-use FluxMailApi\Adapter\Config\MailConfigDto;
+use FluxMailApi\Adapter\Mail\FetchedMailsDto;
+use FluxMailApi\Adapter\Mail\MailConfigDto;
 use FluxMailApi\Channel\FetchMails\Command\FetchMailsCommand;
 
 class FetchMailsService

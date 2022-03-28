@@ -2,8 +2,8 @@
 
 namespace FluxMailApi\Adapter\Api;
 
-use FluxMailApi\Adapter\Config\MailConfigDto;
-use FluxMailApi\Adapter\Config\SmtpConfigDto;
+use FluxMailApi\Adapter\Mail\MailConfigDto;
+use FluxMailApi\Adapter\Smtp\SmtpConfigDto;
 
 class MailApiConfigDto
 {

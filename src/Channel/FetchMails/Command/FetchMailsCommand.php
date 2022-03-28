@@ -3,13 +3,13 @@
 namespace FluxMailApi\Channel\FetchMails\Command;
 
 use DateTime;
-use FluxMailApi\Adapter\Api\AddressDto;
-use FluxMailApi\Adapter\Api\AttachmentDataEncoding;
-use FluxMailApi\Adapter\Api\AttachmentDto;
-use FluxMailApi\Adapter\Api\FetchedMailsDto;
-use FluxMailApi\Adapter\Api\MailDto;
-use FluxMailApi\Adapter\Config\EncryptionType;
-use FluxMailApi\Adapter\Config\MailConfigDto;
+use FluxMailApi\Adapter\Address\AddressDto;
+use FluxMailApi\Adapter\Attachment\AttachmentDataEncoding;
+use FluxMailApi\Adapter\Attachment\AttachmentDto;
+use FluxMailApi\Adapter\Mail\EncryptionType;
+use FluxMailApi\Adapter\Mail\FetchedMailsDto;
+use FluxMailApi\Adapter\Mail\MailConfigDto;
+use FluxMailApi\Adapter\Mail\MailDto;
 use PhpImap\Mailbox;
 
 class FetchMailsCommand
