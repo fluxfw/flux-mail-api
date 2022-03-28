@@ -2,8 +2,8 @@
 
 namespace FluxMailApi\Channel\SendMail\Port;
 
-use FluxMailApi\Adapter\Api\MailDto;
-use FluxMailApi\Adapter\Config\SmtpConfigDto;
+use FluxMailApi\Adapter\Mail\MailDto;
+use FluxMailApi\Adapter\Smtp\SmtpConfigDto;
 use FluxMailApi\Channel\SendMail\Command\SendMailCommand;
 
 class SendMailService

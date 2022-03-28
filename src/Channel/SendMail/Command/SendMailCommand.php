@@ -3,10 +3,10 @@
 namespace FluxMailApi\Channel\SendMail\Command;
 
 use DateTime;
-use FluxMailApi\Adapter\Api\AttachmentDataEncoding;
-use FluxMailApi\Adapter\Api\MailDto;
-use FluxMailApi\Adapter\Config\EncryptionType;
-use FluxMailApi\Adapter\Config\SmtpConfigDto;
+use FluxMailApi\Adapter\Attachment\AttachmentDataEncoding;
+use FluxMailApi\Adapter\Mail\EncryptionType;
+use FluxMailApi\Adapter\Mail\MailDto;
+use FluxMailApi\Adapter\Smtp\SmtpConfigDto;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class SendMailCommand

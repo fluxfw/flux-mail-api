@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxMailApi\Adapter\Api;
+namespace FluxMailApi\Adapter\Attachment;
 
 enum AttachmentDataEncoding: string
 {

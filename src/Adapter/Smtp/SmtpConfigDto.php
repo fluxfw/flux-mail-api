@@ -1,8 +1,9 @@
 <?php
 
-namespace FluxMailApi\Adapter\Config;
+namespace FluxMailApi\Adapter\Smtp;
 
-use FluxMailApi\Adapter\Api\AddressDto;
+use FluxMailApi\Adapter\Address\AddressDto;
+use FluxMailApi\Adapter\Mail\EncryptionType;
 
 class SmtpConfigDto
 {

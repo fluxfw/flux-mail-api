@@ -2,6 +2,8 @@
 
 namespace FluxMailApi\Adapter\Api;
 
+use FluxMailApi\Adapter\Mail\FetchedMailsDto;
+use FluxMailApi\Adapter\Mail\MailDto;
 use FluxMailApi\Channel\FetchMails\Port\FetchMailsService;
 use FluxMailApi\Channel\SendMail\Port\SendMailService;
 
