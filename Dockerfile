@@ -22,7 +22,7 @@ COPY . /flux-mail-api
 
 FROM scratch
 
-LABEL org.opencontainers.image.source="https://github.com/fluxapps/flux-mail-api"
+LABEL org.opencontainers.image.source="https://github.com/flux-eco/flux-mail-api"
 LABEL maintainer="fluxlabs <support@fluxlabs.ch> (https://fluxlabs.ch)"
 
 COPY --from=build /flux-mail-api /flux-mail-api
