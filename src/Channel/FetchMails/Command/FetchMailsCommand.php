@@ -7,7 +7,6 @@ use FluxMailApi\Adapter\Address\AddressDto;
 use FluxMailApi\Adapter\Attachment\AttachmentDataEncoding;
 use FluxMailApi\Adapter\Attachment\AttachmentDto;
 use FluxMailApi\Adapter\Mail\EncryptionType;
-use FluxMailApi\Adapter\Mail\FetchedMailsDto;
 use FluxMailApi\Adapter\Mail\MailConfigDto;
 use FluxMailApi\Adapter\Mail\MailDto;
 use PhpImap\Mailbox;
@@ -31,7 +30,10 @@ class FetchMailsCommand
     }
 
 
-    public function fetch() : FetchedMailsDto
+    /**
+     * @return MailDto[]
+     */
+    public function fetch() : array
     {
         $fetcher = null;
         try {
@@ -88,9 +90,7 @@ class FetchMailsCommand
                 );
             }
 
-            return FetchedMailsDto::new(
-                $mails
-            );
+            $mails;
         } finally {
             if ($fetcher !== null) {
                 $fetcher->disconnect();
