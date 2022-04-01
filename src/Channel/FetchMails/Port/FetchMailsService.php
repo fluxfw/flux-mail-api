@@ -2,8 +2,8 @@
 
 namespace FluxMailApi\Channel\FetchMails\Port;
 
-use FluxMailApi\Adapter\Mail\FetchedMailsDto;
 use FluxMailApi\Adapter\Mail\MailConfigDto;
+use FluxMailApi\Adapter\Mail\MailDto;
 use FluxMailApi\Channel\FetchMails\Command\FetchMailsCommand;
 
 class FetchMailsService
@@ -25,7 +25,10 @@ class FetchMailsService
     }
 
 
-    public function fetch() : FetchedMailsDto
+    /**
+     * @return MailDto[]
+     */
+    public function fetch() : array
     {
         return FetchMailsCommand::new(
             $this->mail_config

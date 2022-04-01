@@ -32,6 +32,13 @@ class MailDto
     }
 
 
+    /**
+     * @param AddressDto[]         $to
+     * @param AttachmentDto[]|null $attachments
+     * @param AddressDto[]|null    $reply_to
+     * @param AddressDto[]|null    $cc
+     * @param AddressDto[]|null    $bcc
+     */
     public static function new(
         string $subject,
         string $body_html,
