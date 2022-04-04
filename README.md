@@ -43,4 +43,4 @@ Minimal variables required to set are **bold**
 
 ## Example
 
-Look at [flux-mail-rest-api](https://github.com/flux-eco/flux-mail-rest-api)
+Look at [flux-mail-rest-api](https://github.com/flux-caps/flux-mail-rest-api)
