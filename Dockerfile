@@ -6,7 +6,7 @@ FROM $FLUX_NAMESPACE_CHANGER_IMAGE:latest AS flux_autoload_api_build
 ENV FLUX_NAMESPACE_CHANGER_FROM_NAMESPACE FluxAutoloadApi
 ENV FLUX_NAMESPACE_CHANGER_TO_NAMESPACE FluxMailApi\\Libs\\FluxAutoloadApi
 COPY --from=flux_autoload_api /flux-autoload-api /code
-RUN /flux-namespace-changer/bin/docker-entrypoint.php
+RUN change-namespace
 
 FROM alpine:latest AS build
 
