@@ -53,9 +53,9 @@ class SmtpConfigDto
             ),
             ($encryption_type = $_ENV["FLUX_MAIL_API_SMTP_ENCRYPTION_TYPE"] ?? null) ? EncryptionType::from($encryption_type) : null,
             ($_ENV["FLUX_MAIL_API_SMTP_USER_NAME"] ?? null) ??
-            (($user_name_file = $_ENV["FLUX_MAIL_API_SMTP_USER_NAME_FILE"] ?? null) !== null && file_exists($user_name_file) ? (file_get_contents($user_name_file) ?: "") : null),
+            (($user_name_file = $_ENV["FLUX_MAIL_API_SMTP_USER_NAME_FILE"] ?? null) !== null && file_exists($user_name_file) ? rtrim(file_get_contents($user_name_file) ?: "", "\n\r") : null),
             ($_ENV["FLUX_MAIL_API_SMTP_PASSWORD"] ?? null) ??
-            (($password_file = $_ENV["FLUX_MAIL_API_SMTP_PASSWORD_FILE"] ?? null) !== null && file_exists($password_file) ? (file_get_contents($password_file) ?: "") : null),
+            (($password_file = $_ENV["FLUX_MAIL_API_SMTP_PASSWORD_FILE"] ?? null) !== null && file_exists($password_file) ? rtrim(file_get_contents($password_file) ?: "", "\n\r") : null),
             ($auth_type = $_ENV["FLUX_MAIL_API_SMTP_AUTH_TYPE"] ?? null) !== null ? SmtpConfigAuthType::from($auth_type) : null
         );
     }

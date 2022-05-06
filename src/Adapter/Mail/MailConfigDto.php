@@ -52,9 +52,9 @@ class MailConfigDto
             $_ENV["FLUX_MAIL_API_MAIL_PORT"],
             MailConfigType::from($_ENV["FLUX_MAIL_API_MAIL_TYPE"]),
             ($_ENV["FLUX_MAIL_API_MAIL_USER_NAME"] ?? null) ??
-            (($user_name_file = $_ENV["FLUX_MAIL_API_MAIL_USER_NAME_FILE"] ?? null) !== null && file_exists($user_name_file) ? (file_get_contents($user_name_file) ?: "") : null),
+            (($user_name_file = $_ENV["FLUX_MAIL_API_MAIL_USER_NAME_FILE"] ?? null) !== null && file_exists($user_name_file) ? rtrim(file_get_contents($user_name_file) ?: "", "\n\r") : null),
             ($_ENV["FLUX_MAIL_API_MAIL_PASSWORD"] ?? null) ??
-            (($password_file = $_ENV["FLUX_MAIL_API_MAIL_PASSWORD_FILE"] ?? null) !== null && file_exists($password_file) ? (file_get_contents($password_file) ?: "") : null),
+            (($password_file = $_ENV["FLUX_MAIL_API_MAIL_PASSWORD_FILE"] ?? null) !== null && file_exists($password_file) ? rtrim(file_get_contents($password_file) ?: "", "\n\r") : null),
             ($encryption_type = $_ENV["FLUX_MAIL_API_MAIL_ENCRYPTION_TYPE"] ?? null) ? EncryptionType::from($encryption_type) : null,
             $_ENV["FLUX_MAIL_API_MAIL_BOX"] ?? null,
             ($mark_as_read = $_ENV["FLUX_MAIL_API_MAIL_MARK_AS_READ"] ?? null) !== null ? in_array($mark_as_read, ["true", "1"]) : null
