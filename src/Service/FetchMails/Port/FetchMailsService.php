@@ -1,10 +1,10 @@
 <?php
 
-namespace FluxMailApi\Channel\FetchMails\Port;
+namespace FluxMailApi\Service\FetchMails\Port;
 
 use FluxMailApi\Adapter\Mail\MailConfigDto;
 use FluxMailApi\Adapter\Mail\MailDto;
-use FluxMailApi\Channel\FetchMails\Command\FetchMailsCommand;
+use FluxMailApi\Service\FetchMails\Command\FetchMailsCommand;
 
 class FetchMailsService
 {
