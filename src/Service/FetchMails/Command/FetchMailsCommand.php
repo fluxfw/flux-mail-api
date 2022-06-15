@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxMailApi\Channel\FetchMails\Command;
+namespace FluxMailApi\Service\FetchMails\Command;
 
 use DateTime;
 use FluxMailApi\Adapter\Address\AddressDto;

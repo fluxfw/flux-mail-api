@@ -1,6 +1,6 @@
 <?php
 
-namespace FluxMailApi\Channel\SendMail\Command;
+namespace FluxMailApi\Service\SendMail\Command;
 
 use DateTime;
 use FluxMailApi\Adapter\Attachment\AttachmentDataEncoding;

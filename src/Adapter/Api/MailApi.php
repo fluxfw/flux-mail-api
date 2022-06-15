@@ -3,8 +3,8 @@
 namespace FluxMailApi\Adapter\Api;
 
 use FluxMailApi\Adapter\Mail\MailDto;
-use FluxMailApi\Channel\FetchMails\Port\FetchMailsService;
-use FluxMailApi\Channel\SendMail\Port\SendMailService;
+use FluxMailApi\Service\FetchMails\Port\FetchMailsService;
+use FluxMailApi\Service\SendMail\Port\SendMailService;
 
 class MailApi
 {
