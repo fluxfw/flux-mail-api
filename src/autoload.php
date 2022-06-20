@@ -4,7 +4,6 @@ namespace FluxMailApi;
 
 require_once __DIR__ . "/../libs/flux-autoload-api/autoload.php";
 
-use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Autoload\ComposerAutoload;
 use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Autoload\Psr4Autoload;
 use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpExtChecker;
 use FluxMailApi\Libs\FluxAutoloadApi\Adapter\Checker\PhpVersionChecker;
@@ -32,11 +31,5 @@ Psr4Autoload::new(
 )
     ->autoload();
 
-ComposerAutoload::new(
-    __DIR__ . "/../libs/php-imap"
-)
-    ->autoload();
-ComposerAutoload::new(
-    __DIR__ . "/../libs/PHPMailer"
-)
-    ->autoload();
+require_once __DIR__ . "/../libs/php-imap/vendor/autoload.php";
+require_once __DIR__ . "/../libs/PHPMailer/vendor/autoload.php";
