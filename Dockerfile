@@ -15,17 +15,19 @@ RUN change-namespace /code/flux-autoload-api FluxAutoloadApi FluxMailApi\\Libs\\
 
 FROM alpine:latest AS build
 
-COPY --from=build_namespaces /code/flux-autoload-api /flux-mail-api/libs/flux-autoload-api
-COPY --from=composer /code/php-imap /flux-mail-api/libs/php-imap
-COPY --from=composer /code/PHPMailer /flux-mail-api/libs/PHPMailer
-COPY . /flux-mail-api
+COPY --from=build_namespaces /code/flux-autoload-api /build/flux-mail-api/libs/flux-autoload-api
+COPY --from=composer /code/php-imap /build/flux-mail-api/libs/php-imap
+COPY --from=composer /code/PHPMailer /build/flux-mail-api/libs/PHPMailer
+COPY . /build/flux-mail-api
+
+RUN (cd /build && tar -czf flux-mail-api.tar.gz flux-mail-api)
 
 FROM scratch
 
 LABEL org.opencontainers.image.source="https://github.com/flux-eco/flux-mail-api"
 LABEL maintainer="fluxlabs <support@fluxlabs.ch> (https://fluxlabs.ch)"
 
-COPY --from=build /flux-mail-api /flux-mail-api
+COPY --from=build /build /
 
 ARG COMMIT_SHA
 LABEL org.opencontainers.image.revision="$COMMIT_SHA"
