@@ -96,9 +96,7 @@ class SendMailCommand
 
             $sender->send();
         } finally {
-            if ($sender !== null) {
-                $sender->smtpClose();
-            }
+            $sender?->smtpClose();
         }
     }
 }

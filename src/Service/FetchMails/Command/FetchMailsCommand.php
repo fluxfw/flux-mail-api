@@ -92,9 +92,7 @@ class FetchMailsCommand
 
             return $mails;
         } finally {
-            if ($fetcher !== null) {
-                $fetcher->disconnect();
-            }
+            $fetcher?->disconnect();
         }
     }
 }
