@@ -5,8 +5,8 @@ FROM $FLUX_AUTOLOAD_API_IMAGE:v2022-06-22-1 AS flux_autoload_api
 
 FROM composer:latest AS composer
 
-RUN (mkdir -p /code/php-imap && cd /code/php-imap && composer require php-imap/php-imap --ignore-platform-reqs)
-RUN (mkdir -p /code/PHPMailer && cd /code/PHPMailer && composer require phpmailer/phpmailer --ignore-platform-reqs)
+RUN (mkdir -p /code/php-imap && cd /code/php-imap && composer require php-imap/php-imap:5.0.0 --ignore-platform-reqs)
+RUN (mkdir -p /code/PHPMailer && cd /code/PHPMailer && composer require phpmailer/phpmailer:v6.6.3 --ignore-platform-reqs)
 
 FROM $FLUX_NAMESPACE_CHANGER_IMAGE:latest AS build_namespaces
 
