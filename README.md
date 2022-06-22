@@ -4,18 +4,58 @@ Mail Api for fetch or send mails
 
 ## Installation
 
+Hint: Use `latest` as `%tag%` (or omit it) for get the latest build
+
+### Non-Composer
+
 ```dockerfile
-COPY --from=docker-registry.fluxpublisher.ch/flux-mail/api:latest /flux-mail-api /%path%/libs/flux-mail-api
+COPY --from=docker-registry.fluxpublisher.ch/flux-mail/api:%tag% /flux-mail-api /%path%/libs/flux-mail-api
 ```
 
-## Usage
+or
+
+```dockerfile
+RUN (mkdir -p /%path%/libs/flux-mail-api && cd /%path%/libs/flux-mail-api && wget -O - https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail/api.tar.gz?tag=%tag% | tar -xz --strip-components=1)
+```
+
+or
+
+Download https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail/api.tar.gz?tag=%tag% and extract it to `/%path%/libs/flux-mail-api`
+
+Hint: If you use `wget` without pipe use `--content-disposition` to get the correct file name
+
+#### Usage
 
 ```php
 require_once __DIR__ . "/%path%/libs/flux-mail-api/autoload.php";
 ```
 
-```php
-MailApi::new();
+### Composer
+
+```json
+{
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "flux/flux-mail-api",
+                "version": "%tag%",
+                "dist": {
+                    "url": "https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail/api.tar.gz?tag=%tag%",
+                    "type": "tar"
+                },
+                "autoload": {
+                    "files": [
+                        "autoload.php"
+                    ]
+                }
+            }
+        }
+    ],
+    "require": {
+        "flux/flux-mail-api": "*"
+    }
+}
 ```
 
 ## Environment variables
