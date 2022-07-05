@@ -4,13 +4,25 @@
 
 Changes:
 
+\-
+
+Get build:
+
+- Docker image: `docker-registry.fluxpublisher.ch/flux-mail-api:latest`
+- Archive: https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail-api.tar.gz?tag=latest
+
+## v2022-07-05-1
+
+Changes:
+
+- Rename docker image
 - Locked flux-namespace-changer version
 - Remove create-gitlab-artifact-from-build
 
 Get build:
 
-- Docker image: `docker-registry.fluxpublisher.ch/flux-mail/api:latest`
-- Archive: https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail/api.tar.gz?tag=latest
+- Docker image: `docker-registry.fluxpublisher.ch/flux-mail-api:v2022-07-05-1`
+- Archive: https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail-api.tar.gz?tag=v2022-07-05-1
 
 ## v2022-06-22-1
 
@@ -22,5 +34,5 @@ Changes:
 
 Get build:
 
-- Docker image: `docker-registry.fluxpublisher.ch/flux-mail/api:v2022-06-22-1`
-- Archive: https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail/api.tar.gz?tag=v2022-06-22-1
+- Docker image: `docker-registry.fluxpublisher.ch/flux-mail-api:v2022-06-22-1`
+- Archive: https://docker-registry.fluxpublisher.ch/api/get-build-archive/flux-mail-api.tar.gz?tag=v2022-06-22-1
