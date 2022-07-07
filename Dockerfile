@@ -26,7 +26,6 @@ FROM scratch
 
 LABEL org.opencontainers.image.source="https://github.com/flux-eco/flux-mail-api"
 LABEL maintainer="fluxlabs <support@fluxlabs.ch> (https://fluxlabs.ch)"
-LABEL flux-docker-registry-rest-api-build-path="/flux-mail-api.tar.gz"
 
 COPY --from=build /build /
 
