@@ -7,12 +7,6 @@ Mail Api for fetch or send mails
 ### Non-Composer
 
 ```dockerfile
-COPY --from=docker-registry.fluxpublisher.ch/flux-mail-api:%tag% /flux-mail-api /%path%/libs/flux-mail-api
-```
-
-or
-
-```dockerfile
 RUN (mkdir -p /%path%/libs/flux-mail-api && cd /%path%/libs/flux-mail-api && wget -O - https://github.com/flux-eco/flux-mail-api/releases/download/%tag%/flux-mail-api-%tag%-build.tar.gz | tar -xz --strip-components=1)
 ```
 
