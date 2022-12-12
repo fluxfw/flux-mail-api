@@ -4,6 +4,7 @@ namespace FluxMailApi\Adapter\Smtp;
 
 use FluxMailApi\Adapter\Address\AddressDto;
 use FluxMailApi\Adapter\Mail\EncryptionType;
+use SensitiveParameter;
 
 class SmtpConfigDto
 {
@@ -27,7 +28,7 @@ class SmtpConfigDto
         AddressDto $default_from,
         ?EncryptionType $encryption_type = null,
         ?string $user_name = null,
-        ?string $password = null,
+        #[SensitiveParameter] ?string $password = null,
         ?SmtpConfigAuthType $auth_type = null
     ) : static {
         return new static(

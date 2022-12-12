@@ -2,6 +2,8 @@
 
 namespace FluxMailApi\Adapter\Mail;
 
+use SensitiveParameter;
+
 class MailConfigDto
 {
 
@@ -27,7 +29,7 @@ class MailConfigDto
         int $port,
         MailConfigType $type,
         string $user_name,
-        string $password,
+        #[SensitiveParameter] string $password,
         ?EncryptionType $encryption_type = null,
         ?string $box = null,
         ?bool $mark_as_read = null
